@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Éber Freitas Dias</h1>
+
+    <p>Oi! Sou designer gráfico de formação (Senac/2006) e programador por paixão/profissão. Aqui eu escrevo sobre as coisas que me interessam e meus projetos.</p>
+
+    <p>Você também pode me encontrar aqui:</p>
+
+    <ul>
+        <li><a href="https://dev.to/eberfreitas">DEV</a> <em>(you can read my posts in english here)</em></li>
+        <li><a href="https://github.com/eberfreitas/">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/eberfreitas/">LinkedIn</a></li>
+        <li><a href="https://twitter.com/eber_freitas">Twitter</a></li>
+        <li><a href="mailto:eber.freitas@gmail.com">E-mail</a></li>
+    </ul>
+
+    <h2>Postagens mais recentes</h2>
+
+    {% set blog = get_section(path="blog/_index.md") %}
+
+    <ul>
+        {% for post in blog.pages | slice(end=5) %}
+            <li>
+                <a href="{{ post.permalink }}">{{ post.title }}</a> -
+                {{ post.date | date(format="%d/%m/%Y") }}
+            </li>
+        {% endfor %}
+        <li><a href="{{ get_url(path="@/blog/_index.md") }}">Mais posts...</a></li>
+    </ul>
+{% endblock content %}

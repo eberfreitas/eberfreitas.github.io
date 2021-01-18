@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% if page.title is defined %}
+                {{ page.title }}
+            {% elif section.title is defined %}
+                {{ section.title }}
+            {% else %}
+                Éber Freitas Dias
+            {% endif %}
+        </title>
+        <link rel="alternate" href="/atom.xml" type="application/atom+xml">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" type="text/css">
+        <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+        <!-- Panelbear Analytics - We respect your privacy -->
+        <script async src="https://cdn.panelbear.com/analytics.js?site=1fTA9gU3VFx"></script>
+        <script>
+            window.panelbear = window.panelbear || function() { (window.panelbear.q = window.panelbear.q || []).push(arguments); };
+            panelbear('config', { site: '1fTA9gU3VFx' });
+        </script>
+    </head>
+
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+</html>
