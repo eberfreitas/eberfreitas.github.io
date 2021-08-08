@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        
+        Pelmodoro - um aplicativo para pomodoro feito em Elm
+        
+    </title>
+    <link rel="alternate" href="/atom.xml" type="application/atom+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+    <!-- Panelbear Analytics - We respect your privacy -->
+    <script async src="https://cdn.panelbear.com/analytics.js?site=1fTA9gU3VFx"></script>
+    <script>
+        window.panelbear = window.panelbear || function () {(window.panelbear.q = window.panelbear.q || []).push(arguments);};
+        panelbear('config', {site: '1fTA9gU3VFx'});
+    </script>
+</head>
+
+<body>
+    
+    <p><a href="http:&#x2F;&#x2F;www.eberfdias.com&#x2F;blog&#x2F;">&larr; ver outras postagens</a></p>
+
+    <h1>Pelmodoro - um aplicativo para pomodoro feito em Elm</h1>
+
+    <p><small>25&#x2F;07&#x2F;2021</small></p>
+
+    <p><a href="https://www.pelmodoro.com/"><strong>Pelmodoro</strong></a> é um aplicativo para te ajudar a aplicar a <em>técnica pomodoro</em> no seu dia a dia. Se você ainda não conhece, vale a pena ler sobre na <a href="https://pt.wikipedia.org/wiki/T%C3%A9cnica_pomodoro">Wikipedia</a>.</p>
+<p><img src="/imgs/2021-07-25-pelmodoro/pelmodoro.png" alt="Pelmodoro" />
+Já existem diversos aplicativos para pomodoro, dos mais variados tipos e complexidades. Depois de alguma experiência com aplicativos diferentes, eu resolvi tentar fazer o meu próprio e <strong>Pelmodoro</strong> é o resultado.</p>
+<p>Além do <em>timer</em> normal, que existe em todo aplicativo para pomodoro, coloquei alguns outros recursos:</p>
+<ul>
+<li>Personalização do número de rounds e dos tempos de cada sessão (trabalho, pausa e pausa longa);</li>
+<li>Controle sobre como o timer se comporta ao final de cada sessão de trabalho ou pausa;</li>
+<li>Controle sobre como você quer ser notificado do término de cada sessão;</li>
+<li>Temas!!! 🎨</li>
+<li>Integração com o Spotify para tocar alguma playlist à sua escolha durante cada round;</li>
+<li>Sistema de avaliação dos seus rounds de trabalho;</li>
+<li>Estatísticas de uso do aplicativo contando o número de horas de trabalho, de descanso, etc;</li>
+<li>Possibilidade de exportar e importar os seus dados estatísticos;</li>
+</ul>
+<p>Além disso <strong>Pelmodoro</strong> é um <a href="https://pt.wikipedia.org/wiki/Progressive_web_app">PWA</a> <a href="http://offlinefirst.org/">off-line first</a> o que significa que você pode instalá-lo no seu celular ou até mesmo no desktop. Eu tenho o usado como uma aplicação independente usando o suporte a PWAs do Edge.</p>
+<p><img src="/imgs/2021-07-25-pelmodoro/themes.png" alt="Pelmodoro com temas" />
+<em>Pelmodoro rodando como um PWA no desktop e alguns dos temas que podem ser usados</em></p>
+<p>O projeto é totalmente open-source e você pode dar uma olhada no código no <a href="https://github.com/eberfreitas/pelmodoro">GitHub</a>.</p>
+<h2 id="por-que-criar-mais-um-aplicativo-para-pomodoro">Por que criar mais um aplicativo para pomodoro?</h2>
+<p>Não existe só um motivo, e a resposta poderia ser simplesmente porque eu quis 😁 Mas além da vontade de criar algo, eu queria usar <a href="https://elm-lang.org/"><strong>Elm</strong></a>, uma linguagem que tenho usado diariamente pelo último ano e meio, mas que nunca tinha criado algo do zero e totalmente meu.</p>
+<p>Além disso eu vinha usando o <a href="https://habitica.com/">Habitica</a> (uma espécie de jogo RPG que tenta te ajudar a cumprir seus objetivos) para acompanhar minha produtividade e tarefas do dia a dia, mas sentia que era um tiro de canhão para o que eu precisava. A ideia, principalmente ao desenvolver o sistema de avaliação dos rounds, foi substituir o Habitica integrando os recursos que faziam sentido pra mim num aplicativo para pomodoro.</p>
+<p><img src="/imgs/2021-07-25-pelmodoro/calendar.png" alt="Calendário com estatísticas" />
+<em>O calendário das estatísticas também serve como gráfico mostrando seus dias mais produtivos, inspirando no gráfico do GitHub</em></p>
+<h2 id="fazendo-funcionar">Fazendo funcionar</h2>
+<p>A principal ferramenta que usei pra criar a aplicação foi a linguagem <a href="https://elm-lang.org/"><strong>Elm</strong></a> e seu ecossistema, que não é muito extenso, mas que oferece muita qualidade e me surpreendeu durante o desenvolvimento.</p>
+<p><strong>Elm</strong> é uma linguagem funcional, fortemente tipada e pura (com efeitos colaterais controlados) voltada para a criação de front-ends e, apesar de não ser uma linguagem extremamente popular, foi tranquilizador ver que muitos dos problemas que eu precisava resolver já haviam sido solucionados.</p>
+<ul>
+<li>Para a renderização do timer eu usei SVG e o excelente <a href="https://package.elm-lang.org/packages/elm/svg/latest/">pacote oficial</a> para a criação e manipulação de documentos SVG;</li>
+<li>Usei o <a href="https://package.elm-lang.org/packages/elm/svg/latest/">elm-css</a> para o CSS, que me permite definir os estilos de maneira tipada e dinâmica;</li>
+<li>Para a manipulação de datas eu usei o pacote <a href="https://package.elm-lang.org/packages/justinmimbs/date/latest/">date</a>;</li>
+<li>A criação do calendário na área de estatísticas foi facilmente resolvido com o pacote <a href="https://package.elm-lang.org/packages/abradley2/elm-calendar/latest/">calendar</a>.</li>
+</ul>
+<p>Para alguns outros recursos, não tive opção a não ser apelar para o JavaScript em si, principalmente na integração com o Spotify. Por sorte o Spotify tem uma <a href="https://developer.spotify.com/documentation/web-api/">documentação razoavelmente completa</a> sobre como utilizar sua API. Depois de um pouco de problemas lutando com o esquema de autorização usando <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce">PKCE</a>, implementar a integração foi bem tranquilo.</p>
+<p>Além disso, para persistir o estado do aplicativo fiz uso tanto do <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Window/localStorage">localStorage</a> (para as preferências e o estado do timer), quanto do <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/IndexedDB_API">IndexedDB</a> (para salvar as estatísticas de uso). Ao invés de usar a API do IndexedDB diretamente, utilizei a excelente biblioteca <a href="https://dexie.org/">Dexie</a> que abstrai grande parte das complexidades de lidar com IndexedDB.</p>
+<p>Para executar os sons de notificação usei a lib <a href="https://howlerjs.com/">howler.js</a>.</p>
+<p><img src="/imgs/2021-07-25-pelmodoro/sentiment.png" alt="Avaliação dos rounds" />
+<em>Avalie cada round de trabalho e verifique suas estatísticas</em></p>
+<h2 id="tornando-belo">Tornando belo</h2>
+<p>Depois de me sentir satisfeito com os recursos implementados e a maneira como tudo estava funcionando, mostrei o trabalho para algumas pessoas que me deram feedbacks muito importantes, principalmente a respeito da estrutura do meu código. Em um período de aproximadamente 2 dias eu reescrevi a estrutura da aplicação refatorando a arquitetura quase que por completo. Ao final eu tinha um PR com a adição de <a href="https://twitter.com/eber_freitas/status/1418434236084797443">5.934 linhas e a remoção de 3.756</a>.</p>
+<p>Em um projeto deste tamanho, escrito totalmente em JavaScript, este seria um PR assustador, mas como ele foi feito com Elm, eu tinha garantias de que o meu código estava correto e compilando normalmente, o que me deu a tranquilidade de fazer o merge do PR sem pensar duas vezes.</p>
+<p>A estrutura original do código foi sendo construída organicamente conforme os recursos iam sendo desenvolvidos, o que gerou um código funcional mas às vezes mal organizado e usando alguns <em>anti-patterns</em>. Um exemplo destes anti-patterns foi a separação dos módulos <code>Model</code>, <code>Msg</code> e <code>Types</code>. A ideia em separar estes módulos foi de evitar <a href="https://github.com/elm/compiler/blob/9d97114702bf6846cab622a2203f60c2d4ebedf2/hints/import-cycles.md">importações cíclicas</a>, mas o que ela acabou demonstrando foram falhas na organização do meu código.</p>
+<p>Usando o código da aplicação <a href="https://github.com/rtfeldman/elm-spa-example">Real World</a>, pude ver como é possível organizar melhor os módulos em partes separadas onde cada uma implementa o seu próprio loop de MVU (model-view-update), mantendo o módulo <code>Main.elm</code> como um <em>hub</em> que agrega cada &quot;página&quot; da aplicação.</p>
+<p>A minha função <code>update</code> original <a href="https://github.com/eberfreitas/pelmodoro/blob/6d4a9e16b254d6b27fd2d5c8699657bbcb6b226d/src/Main.elm#L465">era gigantesca</a>, mas depois pude separar as mensagens para cada <a href="https://github.com/eberfreitas/pelmodoro/tree/main/src/Page">página</a> mantendo o código mais organizado, contido e fácil de entender.</p>
+<p>Dá pra falar muita coisa sobre padrões de estrutura de código em Elm mas recomendo a leitura do <a href="https://sporto.github.io/elm-patterns/">Elm patterns</a> para uma visão mais geral dos principais padrões.</p>
+<p>Além da reestruturação da aplicação, eu acabei implementando algumas decisões mais estilísticas para trazer algum senso de padronização pro código e que eu acho, pessoalmente, que tem seus benefícios:</p>
+<ul>
+<li>Evitar exposição de construtores na definição de módulos;</li>
+<li>Evitar expor tipos e funções na importação de módulos;</li>
+<li>Quando fizer alias na importação de um módulo, utilizar o mesmo nome do módulo em si, simulando o comportamento do <code>alias</code> em Elixir. Ex.: <code>Html.Attributes as Attributes</code>;</li>
+<li>No caso de colisão de nomes optar por a) não usar alias algum ou b) aglomerar os nomes dos módulos. Ex.: <code>Svg.Attributes as SvgAttributes</code>;</li>
+<li>Prefixar funções de view com <code>view</code> 👀</li>
+</ul>
+<p>Na maioria dos casos estas decisões foram tomadas pra tornar o código mais explícito, deixando claro de onde estão vindo as funções e tipos que estão sendo utilizados e quais são os seus efeitos.</p>
+<p><img src="/imgs/2021-07-25-pelmodoro/hourly.png" alt="Horas mais produtivas" />
+<em>Estatísticas mensais, incluindo seus horários de trabalho mais produtivos</em></p>
+<h2 id="pensamentos-finais">Pensamentos finais</h2>
+<p>Apesar da refatoração grande que fiz, sei que a estrutura ainda poderia melhorar em vários lugares, mas eu quero dar este projeto como finalizado. Eu sinto que software é algo que nunca está realmente pronto, tirando algumas jóias raras, mas eu preciso parar de colocar tanto tempo neste projeto que já funciona muito bem e supre as minhas necessidades e me afundar em algum outro projeto paralelo que vai consumir todo meu tempo livre 🤡</p>
+<p>No geral eu estou muito satisfeito com o resultado final e tenho usado o aplicativo diariamente. Com sorte, o aplicativo também será útil para outras pessoas e se este for o seu caso eu vou ficar extremamente feliz se você me contar depois 😊</p>
+
+
+</body>
+
+</html>

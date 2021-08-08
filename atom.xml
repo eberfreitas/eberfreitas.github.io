@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title></title>
+	<link href="http://www.eberfdias.com/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="http://www.eberfdias.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2021-08-08T00:00:00+00:00</updated>
+	<id>http://www.eberfdias.com/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Sobre preguiça, automação, tipos e linguagem funcional</title>
+		<published>2021-08-08T00:00:00+00:00</published>
+		<updated>2021-08-08T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/preguica/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/preguica/</id>
+		<content type="html">&lt;p&gt;Existe aquela frase famosa (que dizem ser) do Bill Gates onde ele diz &lt;strong&gt;&amp;quot;Eu escolho o preguiçoso pra fazer o trabalho difícil porque ele vai encontrar um jeito fácil de executá-lo&amp;quot;&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Acho exagerado, mas talvez com um pingo de verdade? O termo &lt;em&gt;preguiçoso&lt;&#x2F;em&gt; é um meio pesado e poderia ser substituido por &amp;quot;pessoa que otimiza o tempo&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Não tô falando de um workaholic ou maluco da produtividade. Não é isso... É só aquela pessoa que quer usar o seu tempo da maneira mais eficiente naquele instante, seja pra evitar um processo repetitivo ou evitar de se preocupar com o que pode ser cuidado de um jeito mais fácil.&lt;&#x2F;p&gt;
+&lt;p&gt;Automatizar uma tarefa, torna-lá mais fácil de ser executada, delegar preocupações, parecem ser processos de valorização e enriquecimento do tempo.&lt;&#x2F;p&gt;
+&lt;p&gt;Elm, por exemplo, é uma linguagem de programação bem restritiva. Ela é fortemente tipada, imutável e com efeitos colaterais controlados. O que ela cobra na hora de desenvolver dentro dessa estrutura rígida, ela devolve ao garantir a &amp;quot;corretividade&amp;quot; do meu programa e a tranquilidade de que não haverá erros em tempo de execução.&lt;&#x2F;p&gt;
+&lt;p&gt;Quando eu uso Elm, por mais trabalhoso que pareça ser seguir suas regras e limitações, eu estou na verdade escolhendo o caminho da preguiça, afinal o computador pode me auxiliar a escrever um programa mais correto sem sobrecarregar o meu cérebro. Se ele pode fazer este trabalho (através da análise estática por exemplo) então eu não preciso gastar meu tempo nem espaço mental com isso.&lt;&#x2F;p&gt;
+&lt;p&gt;Elm é um exemplo mas existem outras linguagens como Haskell, Rust, PureScript, etc...&lt;&#x2F;p&gt;
+&lt;p&gt;Na hora de escolher uma ferramenta você pode valorizar a sua popularidade, expressividade, quem banca seu desenvolvimento, etc. Eu, quando possível, gosto de escolher valorizar meu tempo.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Pelmodoro - um aplicativo para pomodoro feito em Elm</title>
+		<published>2021-07-25T00:00:00+00:00</published>
+		<updated>2021-07-25T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/pelmodoro/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/pelmodoro/</id>
+		<content type="html">&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.pelmodoro.com&#x2F;&quot;&gt;&lt;strong&gt;Pelmodoro&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt; é um aplicativo para te ajudar a aplicar a &lt;em&gt;técnica pomodoro&lt;&#x2F;em&gt; no seu dia a dia. Se você ainda não conhece, vale a pena ler sobre na &lt;a href=&quot;https:&#x2F;&#x2F;pt.wikipedia.org&#x2F;wiki&#x2F;T%C3%A9cnica_pomodoro&quot;&gt;Wikipedia&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2021-07-25-pelmodoro&#x2F;pelmodoro.png&quot; alt=&quot;Pelmodoro&quot; &#x2F;&gt;
+Já existem diversos aplicativos para pomodoro, dos mais variados tipos e complexidades. Depois de alguma experiência com aplicativos diferentes, eu resolvi tentar fazer o meu próprio e &lt;strong&gt;Pelmodoro&lt;&#x2F;strong&gt; é o resultado.&lt;&#x2F;p&gt;
+&lt;p&gt;Além do &lt;em&gt;timer&lt;&#x2F;em&gt; normal, que existe em todo aplicativo para pomodoro, coloquei alguns outros recursos:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Personalização do número de rounds e dos tempos de cada sessão (trabalho, pausa e pausa longa);&lt;&#x2F;li&gt;
+&lt;li&gt;Controle sobre como o timer se comporta ao final de cada sessão de trabalho ou pausa;&lt;&#x2F;li&gt;
+&lt;li&gt;Controle sobre como você quer ser notificado do término de cada sessão;&lt;&#x2F;li&gt;
+&lt;li&gt;Temas!!! 🎨&lt;&#x2F;li&gt;
+&lt;li&gt;Integração com o Spotify para tocar alguma playlist à sua escolha durante cada round;&lt;&#x2F;li&gt;
+&lt;li&gt;Sistema de avaliação dos seus rounds de trabalho;&lt;&#x2F;li&gt;
+&lt;li&gt;Estatísticas de uso do aplicativo contando o número de horas de trabalho, de descanso, etc;&lt;&#x2F;li&gt;
+&lt;li&gt;Possibilidade de exportar e importar os seus dados estatísticos;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Além disso &lt;strong&gt;Pelmodoro&lt;&#x2F;strong&gt; é um &lt;a href=&quot;https:&#x2F;&#x2F;pt.wikipedia.org&#x2F;wiki&#x2F;Progressive_web_app&quot;&gt;PWA&lt;&#x2F;a&gt; &lt;a href=&quot;http:&#x2F;&#x2F;offlinefirst.org&#x2F;&quot;&gt;off-line first&lt;&#x2F;a&gt; o que significa que você pode instalá-lo no seu celular ou até mesmo no desktop. Eu tenho o usado como uma aplicação independente usando o suporte a PWAs do Edge.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2021-07-25-pelmodoro&#x2F;themes.png&quot; alt=&quot;Pelmodoro com temas&quot; &#x2F;&gt;
+&lt;em&gt;Pelmodoro rodando como um PWA no desktop e alguns dos temas que podem ser usados&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;O projeto é totalmente open-source e você pode dar uma olhada no código no &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;pelmodoro&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;por-que-criar-mais-um-aplicativo-para-pomodoro&quot;&gt;Por que criar mais um aplicativo para pomodoro?&lt;&#x2F;h2&gt;
+&lt;p&gt;Não existe só um motivo, e a resposta poderia ser simplesmente porque eu quis 😁 Mas além da vontade de criar algo, eu queria usar &lt;a href=&quot;https:&#x2F;&#x2F;elm-lang.org&#x2F;&quot;&gt;&lt;strong&gt;Elm&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt;, uma linguagem que tenho usado diariamente pelo último ano e meio, mas que nunca tinha criado algo do zero e totalmente meu.&lt;&#x2F;p&gt;
+&lt;p&gt;Além disso eu vinha usando o &lt;a href=&quot;https:&#x2F;&#x2F;habitica.com&#x2F;&quot;&gt;Habitica&lt;&#x2F;a&gt; (uma espécie de jogo RPG que tenta te ajudar a cumprir seus objetivos) para acompanhar minha produtividade e tarefas do dia a dia, mas sentia que era um tiro de canhão para o que eu precisava. A ideia, principalmente ao desenvolver o sistema de avaliação dos rounds, foi substituir o Habitica integrando os recursos que faziam sentido pra mim num aplicativo para pomodoro.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2021-07-25-pelmodoro&#x2F;calendar.png&quot; alt=&quot;Calendário com estatísticas&quot; &#x2F;&gt;
+&lt;em&gt;O calendário das estatísticas também serve como gráfico mostrando seus dias mais produtivos, inspirando no gráfico do GitHub&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;fazendo-funcionar&quot;&gt;Fazendo funcionar&lt;&#x2F;h2&gt;
+&lt;p&gt;A principal ferramenta que usei pra criar a aplicação foi a linguagem &lt;a href=&quot;https:&#x2F;&#x2F;elm-lang.org&#x2F;&quot;&gt;&lt;strong&gt;Elm&lt;&#x2F;strong&gt;&lt;&#x2F;a&gt; e seu ecossistema, que não é muito extenso, mas que oferece muita qualidade e me surpreendeu durante o desenvolvimento.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Elm&lt;&#x2F;strong&gt; é uma linguagem funcional, fortemente tipada e pura (com efeitos colaterais controlados) voltada para a criação de front-ends e, apesar de não ser uma linguagem extremamente popular, foi tranquilizador ver que muitos dos problemas que eu precisava resolver já haviam sido solucionados.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Para a renderização do timer eu usei SVG e o excelente &lt;a href=&quot;https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;elm&#x2F;svg&#x2F;latest&#x2F;&quot;&gt;pacote oficial&lt;&#x2F;a&gt; para a criação e manipulação de documentos SVG;&lt;&#x2F;li&gt;
+&lt;li&gt;Usei o &lt;a href=&quot;https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;elm&#x2F;svg&#x2F;latest&#x2F;&quot;&gt;elm-css&lt;&#x2F;a&gt; para o CSS, que me permite definir os estilos de maneira tipada e dinâmica;&lt;&#x2F;li&gt;
+&lt;li&gt;Para a manipulação de datas eu usei o pacote &lt;a href=&quot;https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;justinmimbs&#x2F;date&#x2F;latest&#x2F;&quot;&gt;date&lt;&#x2F;a&gt;;&lt;&#x2F;li&gt;
+&lt;li&gt;A criação do calendário na área de estatísticas foi facilmente resolvido com o pacote &lt;a href=&quot;https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;abradley2&#x2F;elm-calendar&#x2F;latest&#x2F;&quot;&gt;calendar&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Para alguns outros recursos, não tive opção a não ser apelar para o JavaScript em si, principalmente na integração com o Spotify. Por sorte o Spotify tem uma &lt;a href=&quot;https:&#x2F;&#x2F;developer.spotify.com&#x2F;documentation&#x2F;web-api&#x2F;&quot;&gt;documentação razoavelmente completa&lt;&#x2F;a&gt; sobre como utilizar sua API. Depois de um pouco de problemas lutando com o esquema de autorização usando &lt;a href=&quot;https:&#x2F;&#x2F;developer.spotify.com&#x2F;documentation&#x2F;general&#x2F;guides&#x2F;authorization-guide&#x2F;#authorization-code-flow-with-proof-key-for-code-exchange-pkce&quot;&gt;PKCE&lt;&#x2F;a&gt;, implementar a integração foi bem tranquilo.&lt;&#x2F;p&gt;
+&lt;p&gt;Além disso, para persistir o estado do aplicativo fiz uso tanto do &lt;a href=&quot;https:&#x2F;&#x2F;developer.mozilla.org&#x2F;pt-BR&#x2F;docs&#x2F;Web&#x2F;API&#x2F;Window&#x2F;localStorage&quot;&gt;localStorage&lt;&#x2F;a&gt; (para as preferências e o estado do timer), quanto do &lt;a href=&quot;https:&#x2F;&#x2F;developer.mozilla.org&#x2F;pt-BR&#x2F;docs&#x2F;Web&#x2F;API&#x2F;IndexedDB_API&quot;&gt;IndexedDB&lt;&#x2F;a&gt; (para salvar as estatísticas de uso). Ao invés de usar a API do IndexedDB diretamente, utilizei a excelente biblioteca &lt;a href=&quot;https:&#x2F;&#x2F;dexie.org&#x2F;&quot;&gt;Dexie&lt;&#x2F;a&gt; que abstrai grande parte das complexidades de lidar com IndexedDB.&lt;&#x2F;p&gt;
+&lt;p&gt;Para executar os sons de notificação usei a lib &lt;a href=&quot;https:&#x2F;&#x2F;howlerjs.com&#x2F;&quot;&gt;howler.js&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2021-07-25-pelmodoro&#x2F;sentiment.png&quot; alt=&quot;Avaliação dos rounds&quot; &#x2F;&gt;
+&lt;em&gt;Avalie cada round de trabalho e verifique suas estatísticas&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tornando-belo&quot;&gt;Tornando belo&lt;&#x2F;h2&gt;
+&lt;p&gt;Depois de me sentir satisfeito com os recursos implementados e a maneira como tudo estava funcionando, mostrei o trabalho para algumas pessoas que me deram feedbacks muito importantes, principalmente a respeito da estrutura do meu código. Em um período de aproximadamente 2 dias eu reescrevi a estrutura da aplicação refatorando a arquitetura quase que por completo. Ao final eu tinha um PR com a adição de &lt;a href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;eber_freitas&#x2F;status&#x2F;1418434236084797443&quot;&gt;5.934 linhas e a remoção de 3.756&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Em um projeto deste tamanho, escrito totalmente em JavaScript, este seria um PR assustador, mas como ele foi feito com Elm, eu tinha garantias de que o meu código estava correto e compilando normalmente, o que me deu a tranquilidade de fazer o merge do PR sem pensar duas vezes.&lt;&#x2F;p&gt;
+&lt;p&gt;A estrutura original do código foi sendo construída organicamente conforme os recursos iam sendo desenvolvidos, o que gerou um código funcional mas às vezes mal organizado e usando alguns &lt;em&gt;anti-patterns&lt;&#x2F;em&gt;. Um exemplo destes anti-patterns foi a separação dos módulos &lt;code&gt;Model&lt;&#x2F;code&gt;, &lt;code&gt;Msg&lt;&#x2F;code&gt; e &lt;code&gt;Types&lt;&#x2F;code&gt;. A ideia em separar estes módulos foi de evitar &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;elm&#x2F;compiler&#x2F;blob&#x2F;9d97114702bf6846cab622a2203f60c2d4ebedf2&#x2F;hints&#x2F;import-cycles.md&quot;&gt;importações cíclicas&lt;&#x2F;a&gt;, mas o que ela acabou demonstrando foram falhas na organização do meu código.&lt;&#x2F;p&gt;
+&lt;p&gt;Usando o código da aplicação &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rtfeldman&#x2F;elm-spa-example&quot;&gt;Real World&lt;&#x2F;a&gt;, pude ver como é possível organizar melhor os módulos em partes separadas onde cada uma implementa o seu próprio loop de MVU (model-view-update), mantendo o módulo &lt;code&gt;Main.elm&lt;&#x2F;code&gt; como um &lt;em&gt;hub&lt;&#x2F;em&gt; que agrega cada &amp;quot;página&amp;quot; da aplicação.&lt;&#x2F;p&gt;
+&lt;p&gt;A minha função &lt;code&gt;update&lt;&#x2F;code&gt; original &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;pelmodoro&#x2F;blob&#x2F;6d4a9e16b254d6b27fd2d5c8699657bbcb6b226d&#x2F;src&#x2F;Main.elm#L465&quot;&gt;era gigantesca&lt;&#x2F;a&gt;, mas depois pude separar as mensagens para cada &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;pelmodoro&#x2F;tree&#x2F;main&#x2F;src&#x2F;Page&quot;&gt;página&lt;&#x2F;a&gt; mantendo o código mais organizado, contido e fácil de entender.&lt;&#x2F;p&gt;
+&lt;p&gt;Dá pra falar muita coisa sobre padrões de estrutura de código em Elm mas recomendo a leitura do &lt;a href=&quot;https:&#x2F;&#x2F;sporto.github.io&#x2F;elm-patterns&#x2F;&quot;&gt;Elm patterns&lt;&#x2F;a&gt; para uma visão mais geral dos principais padrões.&lt;&#x2F;p&gt;
+&lt;p&gt;Além da reestruturação da aplicação, eu acabei implementando algumas decisões mais estilísticas para trazer algum senso de padronização pro código e que eu acho, pessoalmente, que tem seus benefícios:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Evitar exposição de construtores na definição de módulos;&lt;&#x2F;li&gt;
+&lt;li&gt;Evitar expor tipos e funções na importação de módulos;&lt;&#x2F;li&gt;
+&lt;li&gt;Quando fizer alias na importação de um módulo, utilizar o mesmo nome do módulo em si, simulando o comportamento do &lt;code&gt;alias&lt;&#x2F;code&gt; em Elixir. Ex.: &lt;code&gt;Html.Attributes as Attributes&lt;&#x2F;code&gt;;&lt;&#x2F;li&gt;
+&lt;li&gt;No caso de colisão de nomes optar por a) não usar alias algum ou b) aglomerar os nomes dos módulos. Ex.: &lt;code&gt;Svg.Attributes as SvgAttributes&lt;&#x2F;code&gt;;&lt;&#x2F;li&gt;
+&lt;li&gt;Prefixar funções de view com &lt;code&gt;view&lt;&#x2F;code&gt; 👀&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Na maioria dos casos estas decisões foram tomadas pra tornar o código mais explícito, deixando claro de onde estão vindo as funções e tipos que estão sendo utilizados e quais são os seus efeitos.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2021-07-25-pelmodoro&#x2F;hourly.png&quot; alt=&quot;Horas mais produtivas&quot; &#x2F;&gt;
+&lt;em&gt;Estatísticas mensais, incluindo seus horários de trabalho mais produtivos&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pensamentos-finais&quot;&gt;Pensamentos finais&lt;&#x2F;h2&gt;
+&lt;p&gt;Apesar da refatoração grande que fiz, sei que a estrutura ainda poderia melhorar em vários lugares, mas eu quero dar este projeto como finalizado. Eu sinto que software é algo que nunca está realmente pronto, tirando algumas jóias raras, mas eu preciso parar de colocar tanto tempo neste projeto que já funciona muito bem e supre as minhas necessidades e me afundar em algum outro projeto paralelo que vai consumir todo meu tempo livre 🤡&lt;&#x2F;p&gt;
+&lt;p&gt;No geral eu estou muito satisfeito com o resultado final e tenho usado o aplicativo diariamente. Com sorte, o aplicativo também será útil para outras pessoas e se este for o seu caso eu vou ficar extremamente feliz se você me contar depois 😊&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Blog novo de novo</title>
+		<published>2021-01-18T00:00:00+00:00</published>
+		<updated>2021-01-18T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/blog-novo-de-novo/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/blog-novo-de-novo/</id>
+		<content type="html">&lt;p&gt;Acho que a última vez que tive um blog neste domínio foi em 2013! Praticamente 8 anos. Poisé...&lt;&#x2F;p&gt;
+&lt;p&gt;A algum tempo venho escrevendo alguns posts mais técnicos no meu perfil no &lt;a href=&quot;https:&#x2F;&#x2F;dev.to&#x2F;eberfreitas&quot;&gt;DEV&lt;&#x2F;a&gt; numa frequência de mais ou menos um post por ano (uau), e achei que seria legal trazer estes posts para meu próprio espaço, bem como resgatar alguns textos antigos.&lt;&#x2F;p&gt;
+&lt;p&gt;Aqui você vai encontrar alguns posts desde 2007. Nem tudo está listado mas os posts mais desatualizados ou constragedores você encontra direto no &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;eberfreitas.github.io&quot;&gt;repositório&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Pra esta versão do blog eu tentei usar ferramentas fáceis e simples, e espero que o resultado no geral seja agradável.&lt;&#x2F;p&gt;
+&lt;p&gt;Pro sistema de blog em si estou usando o excelente &lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt;, um gerador de sites estáticos escrito em Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;E pra economizar tempo e cérebro no front, eu estou usando o prático &lt;a href=&quot;https:&#x2F;&#x2F;oxal.org&#x2F;projects&#x2F;sakura&#x2F;&quot;&gt;sakura&lt;&#x2F;a&gt; para dar estilos ao meu HTML mesmo sem o uso de classes. Não é nada revolucionário mas também não fica feio.&lt;&#x2F;p&gt;
+&lt;p&gt;Eu espero escrever aqui com mais frequência agora e já tenho na manga alguns posts bacanas que pretendo escrever em breve. Enquanto isso dá pra ler a meia dúzia de posts antigos que eu coloquei por aqui.&lt;&#x2F;p&gt;
+&lt;p&gt;Até breve!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Elm no servidor (ou em qualquer lugar) com promises</title>
+		<published>2021-01-04T00:00:00+00:00</published>
+		<updated>2021-01-04T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/elm-no-servidor-ou-em-qualquer-lugar-com-promises/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/elm-no-servidor-ou-em-qualquer-lugar-com-promises/</id>
+		<content type="html">&lt;p&gt;Elm foi criado pra rodar no browser, mas sempre rola de alguém perguntar como rodar Elm no servidor.&lt;&#x2F;p&gt;
+&lt;p&gt;No meu trabalho atual, a gente precisava sincronizar diversos clientes e persistir o estado compartilhado entre eles em um só lugar, então pensamos que seria uma boa ideia se o servidor agisse como mais um cliente que pudesse persistir este estado em um local centralizado.&lt;&#x2F;p&gt;
+&lt;p&gt;Pra isso a gente criou um servidor com Node&#x2F;Express que era uma grande gambiarra.&lt;&#x2F;p&gt;
+&lt;p&gt;Num ambiente de servidor, na maioria das vezes você vai ter um request&#x2F;pedido e uma response&#x2F;resposta amarrados. Você pede algo e recebe o que pediu ou um erro. Não importa, pra cada request existe uma resposta.&lt;&#x2F;p&gt;
+&lt;p&gt;Mas Elm não funciona assim se você precisa falar com o mundo externo. Sim, você pode usar &lt;a href=&quot;https:&#x2F;&#x2F;guide.elm-lang.org&#x2F;interop&#x2F;ports.html&quot;&gt;ports&lt;&#x2F;a&gt; pra comunicação externa, mas ports usam o actor model de passagem de mensagens. Então ao invés de um request&#x2F;response como você teria em um servidor, você só pode enviar e receber mensagens. Pode parecer a mesma coisa mas não é. Você pode receber uma mensagem sem nunca ter requisitado uma em primeiro lugar. Ou enviar uma mensagem sem a necessidade de esperar outra de volta. Você pode mandar uma mensagem e receber inúmeras outras de uma só vez. Não existe ligação entre as mensagens enviadas e recebidas, e este é um fator que torna Elm impróprio para a criação de servidores onde o request&#x2F;response são sempre amarrados.&lt;&#x2F;p&gt;
+&lt;p&gt;Depois de procurar por soluções melhores eu encontrei &lt;a href=&quot;https:&#x2F;&#x2F;discourse.elm-lang.org&#x2F;t&#x2F;imitating-synchronicity-with-ports&#x2F;1930&quot;&gt;este post&lt;&#x2F;a&gt; nos fóruns onde o usuário &lt;a href=&quot;https:&#x2F;&#x2F;discourse.elm-lang.org&#x2F;u&#x2F;joakin&quot;&gt;joakin&lt;&#x2F;a&gt; fez uma sugestão engenhosa: basta enviar o objeto de &lt;strong&gt;response&lt;&#x2F;strong&gt; do lado do JavaScript através do port e mandá-lo de volta com a resposta de qualquer coisa que tenha sido requisitada. Aí é só usar este objeto para enviar a resposta apropriada para o client correto e pronto. Você pode ver um exemplo dessa abordagem &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;joakin&#x2F;node-elm-server&quot;&gt;neste repositório exemplo&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Ta aí uma coisa que eu não sabia: você pode enviar qualquer valor JavaScript como um &lt;a href=&quot;https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;elm&#x2F;json&#x2F;latest&#x2F;Json-Decode#Value&quot;&gt;&lt;code&gt;Json.Decode.Value&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; pro Elm, até mesmo funções. Claro que não será possível fazer muita coisa com elas dentro do Elm mas, neste caso, ajuda a amarrar uma chamada de função à mensagem que retornaremos.&lt;&#x2F;p&gt;
+&lt;p&gt;A ideia é ótima e nos ajudou a amarrar o fluxo de request&#x2F;response. Mas como poderíamos testar esta integração? Era mais fácil pular toda a parte do servidor e focar na interoperação entre Elm e Node diretamente. Ou pior, e se o software que estivéssemos escrevendo não fosse um servidor Express mas qualquer outra coisa? Foi aí que meu chefe e colega de trabalho &lt;a href=&quot;https:&#x2F;&#x2F;twitter.com&#x2F;nateabele&quot;&gt;Nate&lt;&#x2F;a&gt; sugeriu que usássemos promises. Ao invés de enviar o objeto de response do Express pro Elm, podemos enviar a função de resolve de uma promise!&lt;&#x2F;p&gt;
+&lt;p&gt;Eu fiz um fork do repositório exemplo com estas alterações. Você pode checar &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;node-elm-server&quot;&gt;aqui&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Do &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;node-elm-server&#x2F;blob&#x2F;master&#x2F;src&#x2F;Server.elm&quot;&gt;lado do Elm&lt;&#x2F;a&gt;, nada de significativo mudou. Eu fiz apenas umas alterações nos nomes das coisas pra melhor refletir a nova natureza da interoperação com com o código JavaScript. Mas além disso, não precisamos fazer outras alterações já que, tanto o objeto response do Express quanto a função resolve da promise são apenas &lt;code&gt;Json.Decode.Value&lt;&#x2F;code&gt;s pro Elm.&lt;&#x2F;p&gt;
+&lt;p&gt;A mágica real acontece no &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;eberfreitas&#x2F;node-elm-server&#x2F;blob&#x2F;master&#x2F;index.js&quot;&gt;código JavaScript&lt;&#x2F;a&gt;. O código ficou um pouco mais complexo mas conseguimos desacoplar o código Elm e os ports do Express, tornando possível usar esta abordagem em praticamente qualquer lugar. Aqui esta a parte que faz tudo funcionar:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;http
+  .createServer((request, res) =&amp;gt; {
+    new Promise(resolve =&amp;gt; app.ports.onRequest.send({ request, resolve }))
+      .then(({ status, response }) =&amp;gt; {
+        res.statusCode = status;
+        res.end(response);
+      });
+  })
+  .listen(3000);
+
+app.ports.resolve.subscribe(([{ resolve }, status, response]) =&amp;gt; {
+  resolve({ status, response });
+});
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Sendo assim, é possível usar Elm no servidor, e eu diria que é possível usar esta abordagem em qualquer lugar onde você precise de uma integração com request&#x2F;response amarradas e Node esteja disponível. &lt;strong&gt;Mas é útil?&lt;&#x2F;strong&gt; No nosso caso, onde queríamos reutilizar a maior parte do código de nosso client no server foi uma vitória total, mas eu pensaria duas vezes antes de construir um servidor completo com Elm, já que ele não oferece as ferramentas necessárias pra permitir uma experiência de desenvolvimento satisfatória, embora seja possível.&lt;&#x2F;p&gt;
+&lt;p&gt;Talvez &lt;a href=&quot;https:&#x2F;&#x2F;youtu.be&#x2F;ZnYa99QoznE?t=4755&quot;&gt;Roc&lt;&#x2F;a&gt; seja a linguagem apropriada para estes casos. Mal posso esperar!&lt;&#x2F;p&gt;
+&lt;p&gt;E então, o que achou desta abordagem? Você já teve que fazer algo similar ou totalmente diferente pra resolver o mesmo problema?&lt;&#x2F;p&gt;
+&lt;p&gt;Obrigado por ler!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Comparando Elm a Ember Octane e React</title>
+		<published>2020-05-12T00:00:00+00:00</published>
+		<updated>2020-05-12T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/comparando-elm-a-ember-octane-e-react/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/comparando-elm-a-ember-octane-e-react/</id>
+		<content type="html">&lt;p&gt;Hoje me deparei com o artigo &amp;quot;&lt;a href=&quot;https:&#x2F;&#x2F;www.pzuraq.com&#x2F;comparing-ember-octane-and-react&#x2F;&quot;&gt;Comparing Ember Octane and React&lt;&#x2F;a&gt;&amp;quot; no Hacker News.&lt;&#x2F;p&gt;
+&lt;p&gt;Ele tenta demonstrar como uma mesma aplicação pode ser construída tanto com React quanto Ember, detalhando suas implementações e chegando a algumas conclusões a partir disto. A aplicação é um simples sistema de busca do Hacker News que você pode testar aqui:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;codesandbox.io&#x2F;s&#x2F;github&#x2F;the-road-to-learn-react&#x2F;hacker-stories&#x2F;tree&#x2F;hs&#x2F;Async-Await-in-React&quot;&gt;React&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;glitch.com&#x2F;%7Ecomparing-ember-octane-and-react&quot;&gt;Ember&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Ao final do artigo, o autor (&lt;a href=&quot;https:&#x2F;&#x2F;www.pzuraq.com&#x2F;author&#x2F;pzuraq&#x2F;&quot;&gt;Chris Garrett&lt;&#x2F;a&gt;, que é um membro do core team do Ember) escreve:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Escrevendo este post, eu sinto que pude experimentar React com hooks de forma muito mais profunda que nas minhas pesquisas anteriores, e eu gostei muito do que aprendi. É um modelo de programação interessante, e enquanto não esteja totalmente convencido ainda (pessoalmente eu acho que prefiro algo mais parecido com &lt;strong&gt;Elm&lt;&#x2F;strong&gt;), posso ver claramente porque as pessoas gostam dele e quais são suas vantagens.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Isso me fez pensar: como seria a versão Elm da mesma aplicação? Então eu tentei contruí-la! Você pode ver o resultado final &lt;a href=&quot;https:&#x2F;&#x2F;ellie-app.com&#x2F;8Rn7dL9RKyWa1&quot;&gt;aqui&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Como no post original, vamos dar uma olhada mais profunda no que está acontecendo.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;getting-started&quot;&gt;Getting started&lt;&#x2F;h1&gt;
+&lt;pre&gt;&lt;code&gt;port module Main exposing (main)
+
+import Browser
+import Browser.Dom as Dom
+import Html exposing (Html, a, button, div, h1, hr, input, label, p, span, strong, text)
+import Html.Attributes exposing (disabled, for, href, id, type_, value)
+import Html.Events exposing (onClick, onInput)
+import Http
+import Json.Decode as Decode exposing (Decoder)
+import Task
+
+
+port sendQuery : String -&amp;gt; Cmd msg
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;É assim que a maioria das aplicações Elm (e arquivos) começam. Você define o nome do módulo do arquivo e explicitamente declara o que quer expor e importar de outros módulos. Elm tem seu próprio package manager e quando você cria um novo projeto, ele irá instalar alguns pacotes básicos. Nós tivemos que instalar alguns pacotes extras como &lt;code&gt;elm&#x2F;json&lt;&#x2F;code&gt; e &lt;code&gt;elm&#x2F;http&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Uma coisa importante do nosso módulo é que ele começa com o texto &lt;code&gt;port module&lt;&#x2F;code&gt;. Caso você nunca tenha ouvido falar de Elm, ela é uma linguagem funcional totalmente pura que não pode ter efeitos colaterais. Isso significa que não podemos, por exemplo, definir coisas no nosso &lt;code&gt;localStorage&lt;&#x2F;code&gt; a partir do código Elm. É aí que ports entram, mas vamos falar mais sobre isso depois. No final desta seção declaramos um port chamado &lt;code&gt;sendQuery&lt;&#x2F;code&gt; que usaremos mais à frente.&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;type alias Story =
+    { id : String
+    , title : String
+    , author : String
+    , url : String
+    , comments : Int
+    , points : Int
+    }
+
+
+type alias Model =
+    { input : String
+    , lastSearch : String
+    , stories : Stories
+    }
+
+
+type Stories
+    = Loading
+    | Error
+    | Stories (List Story)
+
+
+type Msg
+    = NoOp
+    | GotInput String
+    | Search
+    | Dismiss String
+    | GotResults (Result Http.Error Stories)
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Aqui temos as definições dos nossos tipos. Elm é uma linguagem forte e estaticamente tipada. Isso significa que podemos criar nossos próprios tipos para modelar nossa aplicação. Promeiro temos dois tipos alias: &lt;code&gt;Story&lt;&#x2F;code&gt; e &lt;code&gt;Model&lt;&#x2F;code&gt;. Um tipo alias é um tipo que dá um apelido a uma estrutura já conhecida. Desta forma podemos depender do compilador pra nos ajudar a escrever códigos corretos o tempo todo.&lt;&#x2F;p&gt;
+&lt;p&gt;Depois temos dois tipos customizados: &lt;code&gt;Stories&lt;&#x2F;code&gt; e &lt;code&gt;Msg&lt;&#x2F;code&gt;. Estes tipos irão nos ajudar entender melhor o estado da nossa aplicação e o que devemos fazer a seu respeito.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;a-tea&quot;&gt;A TEA&lt;&#x2F;h1&gt;
+&lt;p&gt;A TEA (ou The Elm Architecture) é uma forma de descrever como a maioria das aplicações Elm funcionam e como os dados fluem através de nosso código. Ela consiste em alguns conceitos básicos:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Temos um estado global;&lt;&#x2F;li&gt;
+&lt;li&gt;Este estado é renderizado usando alguma função &lt;code&gt;view&lt;&#x2F;code&gt;;&lt;&#x2F;li&gt;
+&lt;li&gt;A &lt;code&gt;view&lt;&#x2F;code&gt; pode enviar mensagens de algum tipo para a função &lt;code&gt;update&lt;&#x2F;code&gt; (imagine um clique de botão ou o envio de um formulário);&lt;&#x2F;li&gt;
+&lt;li&gt;Por fim, o &lt;code&gt;update&lt;&#x2F;code&gt; muta o estado que então é renderizado novamente pela &lt;code&gt;view&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;E é isso! Então vamos construir estas funções:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;update : Msg -&amp;gt; Model -&amp;gt; ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        NoOp -&amp;gt;
+            ( model, Cmd.none )
+
+        GotInput i -&amp;gt;
+            ( { model | input = i }, Cmd.none )
+
+        Search -&amp;gt;
+            if model.input &#x2F;= model.lastSearch then
+                ( { model | lastSearch = model.input, stories = Loading }
+                , Cmd.batch
+                    [ request model.input
+                    , sendQuery model.input
+                    , focusSearch
+                    ]
+                )
+
+            else
+                ( model, Cmd.none )
+
+        Dismiss id_ -&amp;gt;
+            let
+                stories_ =
+                    case model.stories of
+                        Stories s -&amp;gt;
+                            Stories (List.filter (.id &amp;gt;&amp;gt; (&#x2F;=) id_) s)
+
+                        _ -&amp;gt;
+                            model.stories
+            in
+            ( { model | stories = stories_ }, Cmd.none )
+
+        GotResults res -&amp;gt;
+            case res of
+                Err e -&amp;gt;
+                    let
+                        _ =
+                            Debug.log &amp;quot;error&amp;quot; e
+                    in
+                    ( { model | stories = Error }, Cmd.none )
+
+                Ok s -&amp;gt;
+                    ( { model | stories = s }, Cmd.none )
+
+
+view : Model -&amp;gt; Html Msg
+view model =
+    div [] &amp;lt;|
+        h1 [] [ text &amp;quot;My Hacker Stories&amp;quot; ]
+            :: searchForm model.input
+            ++ stories model.stories
+
+
+searchForm : String -&amp;gt; List (Html Msg)
+searchForm input_ =
+    [ label [ for &amp;quot;search&amp;quot; ] [ strong [] [ text &amp;quot;Search:&amp;quot; ] ]
+    , input [ id &amp;quot;search&amp;quot;, value input_, onInput GotInput, type_ &amp;quot;text&amp;quot; ] []
+    , button [ disabled (input_ == &amp;quot;&amp;quot;), onClick Search ] [ text &amp;quot;Submit&amp;quot; ]
+    , hr [] []
+    ]
+
+
+stories : Stories -&amp;gt; List (Html Msg)
+stories stories_ =
+    case stories_ of
+        Loading -&amp;gt;
+            [ p [] [ text &amp;quot;Loading ...&amp;quot; ] ]
+
+        Error -&amp;gt;
+            [ p [] [ text &amp;quot;Something went wrong ...&amp;quot; ] ]
+
+        Stories [] -&amp;gt;
+            [ p [] [ text &amp;quot;No results.&amp;quot; ] ]
+
+        Stories list -&amp;gt;
+            List.map storyItem list
+
+
+storyItem i =
+    div []
+        [ span [] [ a [ href i.url ] [ text i.title ] ]
+        , text &amp;quot; &amp;quot;
+        , span [] [ text i.author ]
+        , text &amp;quot; &amp;quot;
+        , span [] [ text (String.fromInt i.comments) ]
+        , text &amp;quot; &amp;quot;
+        , span [] [ text (String.fromInt i.points) ]
+        , text &amp;quot; &amp;quot;
+        , span [] [ button [ onClick (Dismiss i.id) ] [ text &amp;quot;Dismiss&amp;quot; ] ]
+        ]
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Aqui temos uma função &lt;code&gt;update&lt;&#x2F;code&gt; que irá receber nosso model (estado) e mensagem. Lembra dos nossos tipos &lt;code&gt;Model&lt;&#x2F;code&gt; e &lt;code&gt;Msg&lt;&#x2F;code&gt;? Vamos usá-los aqui. Precisamos checar qual &lt;code&gt;Msg&lt;&#x2F;code&gt; estamos recebendo para realizar as mudanças apropriadas ao &lt;code&gt;Model&lt;&#x2F;code&gt;. E se você estiver prestando atenção vai ver que nós não retornamos apenas o &lt;code&gt;Model&lt;&#x2F;code&gt;, mas também um &lt;code&gt;Cmd msg&lt;&#x2F;code&gt; (comando). Lembra quando eu disse que Elm não tem efeitos colaterais? Pra resolver este problema temos comandos, que são um tipo especial que entregamos pro runtime do Elm resolver pra gente. Pode ser, por exemplo, uma requisição HTTP como a que estamos fazendo quando &lt;code&gt;Msg&lt;&#x2F;code&gt; é &lt;code&gt;Seach&lt;&#x2F;code&gt;. Mais sobre isso depois...&lt;&#x2F;p&gt;
+&lt;p&gt;Depois disso, temos algumas funções especiais que irão retornar o tipo &lt;code&gt;Html&lt;&#x2F;code&gt;. Elas não retornam HTML em si, mas é assim que implementamos templates e componentes com Elm. Usando apenas funções! O runtime do Elm vai se encarregar de renderizar o HTML correto a partir delas.&lt;&#x2F;p&gt;
+&lt;p&gt;Agora vamos juntar tudo:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;main : Program String Model Msg
+main =
+    Browser.element
+        { init =
+            \query -&amp;gt;
+                ( { input = query, lastSearch = query, stories = Loading }
+                , Cmd.batch [ request query, focusSearch ]
+                )
+        , view = view
+        , update = update
+        , subscriptions = always Sub.none
+        }
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A função &lt;code&gt;main&lt;&#x2F;code&gt; é o ponto de entrada da nossa aplicação. É a função que o runtime do Elm vai olhar assim que tudo for inicializado. Aqui estamos dizendo explicitamente quais funções nossa aplicação deve usar pra cada passo da TEA. a chave &lt;code&gt;init&lt;&#x2F;code&gt; é uma função que deve retornar nosso model (estado) inicial. As chaves &lt;code&gt;view&lt;&#x2F;code&gt; e &lt;code&gt;update&lt;&#x2F;code&gt; não precisam de maiores explicações. Por fim, temos a &lt;code&gt;subscriptions&lt;&#x2F;code&gt; que não vamos usar mas que se você estiver curioso pode dar uma olhada no &lt;a href=&quot;https:&#x2F;&#x2F;guide.elm-lang.org&#x2F;&quot;&gt;elm guide&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;o-que-ficou-faltando&quot;&gt;O que ficou faltando&lt;&#x2F;h1&gt;
+&lt;p&gt;Por fim temos algumas funções extras que irão tornar a interação com nossa aplicação mais dinâmica:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;focusSearch : Cmd Msg
+focusSearch =
+    Task.attempt (\_ -&amp;gt; NoOp) (Dom.focus &amp;quot;search&amp;quot;)
+
+
+request : String -&amp;gt; Cmd Msg
+request query =
+    Http.get
+        { url = &amp;quot;https:&#x2F;&#x2F;hn.algolia.com&#x2F;api&#x2F;v1&#x2F;search?query=&amp;quot; ++ query
+        , expect = Http.expectJson GotResults resultsDecoder
+        }
+
+
+resultsDecoder : Decoder Stories
+resultsDecoder =
+    Decode.field &amp;quot;hits&amp;quot; (Decode.list storyDecoder)
+        |&amp;gt; Decode.andThen (Decode.succeed &amp;lt;&amp;lt; Stories)
+
+
+storyDecoder : Decoder Story
+storyDecoder =
+    Decode.map6 Story
+        (Decode.field &amp;quot;objectID&amp;quot; Decode.string)
+        (Decode.field &amp;quot;title&amp;quot; Decode.string)
+        (Decode.field &amp;quot;author&amp;quot; Decode.string)
+        (Decode.field &amp;quot;url&amp;quot; Decode.string)
+        (Decode.field &amp;quot;num_comments&amp;quot; Decode.int)
+        (Decode.field &amp;quot;points&amp;quot; Decode.int)
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A função &lt;code&gt;focusSearch&lt;&#x2F;code&gt; é apenas um helper que retorna um comando para informar o runtime do Elm para focar em um elemento com uma &lt;code&gt;id&lt;&#x2F;code&gt; específica e é isso. Eu copiei esta função inteira do elm guide.&lt;&#x2F;p&gt;
+&lt;p&gt;A função realmente importante vem em seguida: &lt;code&gt;request&lt;&#x2F;code&gt;. Ela recebe uma query string e cria um comando que irá rodar uma requisição HTTP. É aqui que Elm brilha pra mim. Após fazer a requisição o runtime irá mandar uma nova mensagem pra nossa aplicação com os dados usando a mensagem &lt;code&gt;GotResults&lt;&#x2F;code&gt;, esperando um JSON que possa ser decodificado com sucesso pela função &lt;code&gt;resultsDecoder&lt;&#x2F;code&gt;. Veja, tudo em Elm é tipado então não podemos simplesmente receber qualquer tipo de dado do servidor. Como o compilador saberia com quais tipos estamos lidando? É por isso que temos que decodificar o JSON que recebemos, fazendo-o encaixar em algum tipo específico. No nosso caso, precisamos que o nosso JSON retorne um tipo &lt;code&gt;Stories&lt;&#x2F;code&gt; válido.&lt;&#x2F;p&gt;
+&lt;p&gt;Se você der uma olhada na forma como lidamos com a mensagem &lt;code&gt;GotResults&lt;&#x2F;code&gt; na nossa função &lt;code&gt;update&lt;&#x2F;code&gt;, vai ver que o dado que temos de volta pode ser &lt;code&gt;Ok ...&lt;&#x2F;code&gt; ou &lt;code&gt;Err ...&lt;&#x2F;code&gt;. Um &lt;code&gt;Err&lt;&#x2F;code&gt; pode ocorrer se a requisição HTTP falhar ou se a decodificação falhar.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;ainda-precisamos-de-js&quot;&gt;Ainda precisamos de JS...&lt;&#x2F;h1&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;style&amp;gt;
+    &#x2F;* you can style your program here *&#x2F;
+  &amp;lt;&#x2F;style&amp;gt;
+&amp;lt;&#x2F;head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;main&amp;gt;&amp;lt;&#x2F;main&amp;gt;
+  &amp;lt;script&amp;gt;
+    var app = Elm.Main.init({
+      node: document.querySelector(&#x27;main&#x27;),
+      flags: localStorage.getItem(&#x27;searchTerm&#x27;) || &#x27;Elm&#x27;
+    });
+
+    app.ports.sendQuery.subscribe(query =&amp;gt; localStorage.setItem(&#x27;searchTerm&#x27;, query));
+  &amp;lt;&#x2F;script&amp;gt;
+&amp;lt;&#x2F;body&amp;gt;
+&amp;lt;&#x2F;html&amp;gt;
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A parte importante do nosso HTML&#x2F;JS é onde inicializamos a app. Na chamada à função &lt;code&gt;init&lt;&#x2F;code&gt; nós passamos o valor atualmente guardado no nosso &lt;code&gt;localStorage&lt;&#x2F;code&gt;. Dê uma olhada na função &lt;code&gt;init&lt;&#x2F;code&gt; do lado do Elm para ver como lidamos com isto.&lt;&#x2F;p&gt;
+&lt;p&gt;Depois, usamos o port &lt;code&gt;sendQuery&lt;&#x2F;code&gt; para salvar o termo de busca toda vez que uma nova busca ocorrer. Olhe em como lidamos com a mensagem &lt;code&gt;Search&lt;&#x2F;code&gt; na função &lt;code&gt;update&lt;&#x2F;code&gt; para ver o uso do port &lt;code&gt;sendQuery&lt;&#x2F;code&gt; que definimos no início de nosso módulo.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;aprendizados&quot;&gt;Aprendizados&lt;&#x2F;h1&gt;
+&lt;p&gt;Eu não tenho nenhuma experiência real com React ou Ember então esta seção não será tão bem elaborada ou profunda quanto no artigo original. Mas vamos dar uma olhada em como Elm resolve alguns dos nosso problemas de maneira simples e eficientes.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;custom-types-sao-incriveis&quot;&gt;Custom types são incríveis&lt;&#x2F;h2&gt;
+&lt;p&gt;Na função &lt;code&gt;storiesReducer&lt;&#x2F;code&gt; da implementação em React temos algo parecido com o que a nossa função &lt;code&gt;update&lt;&#x2F;code&gt; faz. O problema é que ele usa strings puras como chaves para as possíveis ações a serem executadas. Isso é ok até você precisar de mais mensagens&#x2F;ações.&lt;&#x2F;p&gt;
+&lt;p&gt;Pelo fato de estarmos usando um custom type como nossas mensagens (a gente poderia usar strings mas elas não seriam muito úteis), precisamos lidar com todas as possibilidades de mensagens que existem dentro deste tipo. Se precisarmos de mais mensagens, basta adicioná-las ao tipo &lt;code&gt;Msg&lt;&#x2F;code&gt; e o compilador vai educadamente nos avisar de todos os lugares onde precisamos lidar com esta nova mensagem se esquecermos de algo.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;custom-types-sao-incriveis2&quot;&gt;Custom types são incríveis²&lt;&#x2F;h2&gt;
+&lt;p&gt;Tanto na implementação React quanto Ember você vê que o &amp;quot;model&amp;quot; tem algumas flags como &lt;code&gt;isLoading&lt;&#x2F;code&gt; ou &lt;code&gt;isError&lt;&#x2F;code&gt;. Tudo o que essas flags fazem é informar o estado dos resultados que estamos tentando carregar. Veja como sempre é necessário resetar estes valores pra não acontecer de termos a informação de erro enquanto carregamos algo ao mesmo tempo. Nada impede isso de realmente acontecer...&lt;&#x2F;p&gt;
+&lt;p&gt;Podemos resolver isto com custom types que representam um estado dos resultados por vez. Não é possível termos a situação &lt;code&gt;Loading&lt;&#x2F;code&gt; e &lt;code&gt;Error&lt;&#x2F;code&gt; ao mesmo tempo, assim temos certeza que nossa view sempre irá renderizar a coisa certa.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;decodificacao-de-json&quot;&gt;Decodificação de JSON&lt;&#x2F;h2&gt;
+&lt;p&gt;A gente tem um bug nessa app. O título ou autor de uma história podem ter um valor &lt;code&gt;null&lt;&#x2F;code&gt; vindo da chamada da API. Se eu abrir as apps React ou Ember e procurar por algo como &amp;quot;elmish&amp;quot; por exemplo, você vai ver algumas linhas esquisitas. Isso acontece porque JavaScript não vai te impedir de acessar dados que não existem em um objeto, renderizando uma lista confusa e pouco informativa de... coisas.&lt;&#x2F;p&gt;
+&lt;p&gt;Isso não pode acontecer com Elm. Além do fato de termos usados tipos alias para informar o compilador sobre a forma das nossas estruturas, quando recebemos dados do mundo exterior ele precisa passar por um processo de decodificação e este processo pode ser bem sucedido ou não: Elm nos força a lidar com ambas as situações ou nosso programa não compila. Procure por &amp;quot;elmish&amp;quot; na versão Elm e você verá a mensagem &amp;quot;Something went wrong...&amp;quot; (Algo de errado aconteceu...). Isto acontece porque nosso decoder só decodifica strings para a chave &lt;code&gt;title&lt;&#x2F;code&gt; e se temos um &lt;code&gt;null&lt;&#x2F;code&gt; do lado do JSON, ele não consegue decodificar.&lt;&#x2F;p&gt;
+&lt;p&gt;Nós poderíamos então atualizar nosso decodificador para lidar com estas situações, talvez fazendo o &lt;code&gt;title&lt;&#x2F;code&gt; ser um &lt;code&gt;Maybe String&lt;&#x2F;code&gt;, e isto nos forçaria a lidar com o fato de que &lt;code&gt;title&lt;&#x2F;code&gt; pode ser tanto &lt;code&gt;Just ...&lt;&#x2F;code&gt; quando &lt;code&gt;Nothing&lt;&#x2F;code&gt; em nossa função de &lt;code&gt;view&lt;&#x2F;code&gt;. Nunca seríamos capazes de reproduzir as linhas confusas e bobas que temos quando usamos &amp;quot;apenas&amp;quot; Javascript.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;uma-abordagem-simples&quot;&gt;Uma abordagem simples&lt;&#x2F;h2&gt;
+&lt;p&gt;Hooks, components, tracked properties, actions, etc... Aplicações do mundo JS podem ter muitos conceitos que requerem tempo para aprender e dominar. Por outro lado, Elm é super simples. Apesar da sua sintaxe esquisita, se você nunca lidou com algo parecidoa antes, Elm introduz pouquíssimos conceitos: tudo é função, e a forma como a sua aplicação funciona é através de iterações da TEA, só isso.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Eu sinto que estou sendo superficial em comparação ao artigo tão bem informado e bem escrito no qual este foi baseado, mas eu espero ter tido algum sucesso em mostrar como Elm solucionaria problemas similares apontando para as coisas animadoras que a linguagem traz à mesa.&lt;&#x2F;p&gt;
+&lt;p&gt;O que eu estou esquecendo da minha lista de aprendizados? Existe algum lugar onde as soluções React&#x2F;Ember sejam melhores? Por favor, mande seus comentários. Até breve!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Elixir para desenvolvedores PHP - Paradigma de programação</title>
+		<published>2019-10-01T00:00:00+00:00</published>
+		<updated>2019-10-01T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/elixir-para-desenvolvedores-php-parte-i/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/elixir-para-desenvolvedores-php-parte-i/</id>
+		<content type="html">&lt;p&gt;Quando quero aprender algo novo tento achar algum material comparando o que quero aprender com algo que eu já conheça. Assim posso medir os pros e contras e decidir se devo investir meu tempo nisso.&lt;&#x2F;p&gt;
+&lt;p&gt;Eu venho do mundo do PHP e me apaixonei por Elixir então minha ideia aqui é comparar alguns aspectos destas linguagens e mostrar como elas são diferentes (ou similares) e talvez te ajudar a tomar a decisão de aprender mais sobre ela. Espero te mostrar que Elixir é uma linguagem divertida de se trabalhar!&lt;&#x2F;p&gt;
+&lt;p&gt;Aliás, sou iniciante no mundo Elixir. Esta é a perspectiva de alguém escrevendo enquanto aprende a linguagem então leve isto em consideração.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;elixir-e-uma-linguagem-funcional&quot;&gt;Elixir é uma linguagem funcional&lt;&#x2F;h2&gt;
+&lt;p&gt;A primeira grande diferença entre PHP e Elixir é que Elixir é uma linguagem funcional pura. PHP, no entanto, é uma linguagem multi-paradigma, onde você pode resolver problemas usando diferentes paradigmas embora POO (programação orientada a objetos) seja bem dominante hoje em dia.&lt;&#x2F;p&gt;
+&lt;p&gt;E o que FP (functional programming ou programação funcional) significa? A teoria pode ficar bem pesada e talvez você queira ler o artigo na &lt;a href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Functional_programming&quot;&gt;Wikipedia&lt;&#x2F;a&gt; para uma descrição mais elaborada, mas em resumo e para os propósitos desta comparação, significa que &lt;strong&gt;não existem objetos&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Um objeto em POO é (além de outras coisas) quando você junta dados e funcionalidades: no mesmo objeto você tem o estado e os métodos para afetar este estado.&lt;&#x2F;p&gt;
+&lt;p&gt;Mas em FP estas coisas são separadas e tudo o que você tem são funções que manipulam dados. Vamos dar uma olhada em como isso se parece:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+
+class User extends DataLayer
+{
+  private $name;
+  private $email;
+
+  public function __construct(string $name, string $email)
+  {
+    $this-&amp;gt;name = $name;
+    $this-&amp;gt;email = $email;
+  }
+}
+
+$user = new User(&#x27;John Doe&#x27;, &#x27;john.doe@example.com&#x27;);
+
+$user-&amp;gt;save();
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;O equivalente em Elixir do código anterior seria algo mais ou menos assim:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;defmodule User do
+  defstruct name: nil, email: nil
+
+  def save(%User{} = user) do
+    Repo.insert(user)
+  end
+end
+
+%User{name: &amp;quot;John Doe&amp;quot;, email: &amp;quot;john.doe@example.com&amp;quot;}
+|&amp;gt; User.save()
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Existe muita coisa acontecendo aqui. A sintaxe é um pouco alien se comparada à do PHP. Sem colchetes, e o que é aquela atribuição na definição da função? Bem, chegaremos lá mas só pra esclarecer, aquilo &lt;strong&gt;não é&lt;&#x2F;strong&gt; uma atribuição.&lt;&#x2F;p&gt;
+&lt;p&gt;O que fizemos aqui foi criar uma &lt;code&gt;struct&lt;&#x2F;code&gt; que é um &lt;code&gt;map&lt;&#x2F;code&gt; glorificado. Um &lt;code&gt;map&lt;&#x2F;code&gt; é similar a um array associativo em PHP onde você tem chaves e valores. A diferença entre um &lt;code&gt;map&lt;&#x2F;code&gt; e uma &lt;code&gt;struct&lt;&#x2F;code&gt; é que com a &lt;code&gt;struct&lt;&#x2F;code&gt; você pode estruturar como seus dados devem se parecer, definindo chaves específicas e até mesmo valores padrão (você pode estar pensando agora &amp;quot;uhm, isso parece um objeto&amp;quot; mas &lt;strong&gt;não é&lt;&#x2F;strong&gt;, são apenas dados).&lt;&#x2F;p&gt;
+&lt;p&gt;Outra coisa que você deve ter percebido é que não temos nenhum tipo de herança. No código PHP fica pressuposto que o método &lt;code&gt;save&lt;&#x2F;code&gt; vem da classe &lt;code&gt;DataLayer&lt;&#x2F;code&gt; da qual a nossa classe &lt;code&gt;User&lt;&#x2F;code&gt; extende mas no código Elixir a função &lt;code&gt;save&lt;&#x2F;code&gt; está apenas chamando uma outra função de um outro módulo (&lt;code&gt;Repo&lt;&#x2F;code&gt; neste caso) para persistir os dados no nosso banco.&lt;&#x2F;p&gt;
+&lt;p&gt;Em FP você tem dados e funções por todos os lados e seu trabalho é &lt;strong&gt;compor&lt;&#x2F;strong&gt; estas coisas para criar outras coisas maiores que também podem compor outras coisas.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;mas-php-tambem-tem-funcoes&quot;&gt;Mas PHP também tem funções...&lt;&#x2F;h2&gt;
+&lt;p&gt;O código Elixir também poderia ser traduzido para PHP mais ou menos assim:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+
+function save(array $user): bool
+{
+  DataLayer::persist($user);
+}
+
+$user = [&#x27;name&#x27; =&amp;gt; &#x27;John Doe&#x27;, &#x27;email&#x27; =&amp;gt; &#x27;john.doe@example.com&#x27;];
+save($user);
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Então PHP pode ser funcional certo? Bom, certo... Eu acho? Como disse no início, Elixir é uma linguagem funcional &lt;strong&gt;pura&lt;&#x2F;strong&gt;. Isso siginifica que não existem &amp;quot;atalhos&amp;quot; pra fora deste mundo quando usamos Elixir.&lt;&#x2F;p&gt;
+&lt;p&gt;Em PHP você pode desenvolver usando um &amp;quot;estilo funcional&amp;quot; mas nunca será funcional de verdade. Você pode ficar &amp;quot;preguiçoso&amp;quot; e apenas tirar vantagem da natureza multi-paradigma da linguagem para resolver alguns problemas e, na realidade, seria melhor assim pois PHP não é uma linguagem funcional.&lt;&#x2F;p&gt;
+&lt;p&gt;E FP não se caracteriza apenas pela ausência de objetos. Se você teve a curiosidade de ler aquele artigo da Wikipedia viu que este paradigma inclui outras coisas como:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Funções de primeira classe&lt;&#x2F;li&gt;
+&lt;li&gt;Funções totais&lt;&#x2F;li&gt;
+&lt;li&gt;Funções puras&lt;&#x2F;li&gt;
+&lt;li&gt;Imutabilidade&lt;&#x2F;li&gt;
+&lt;li&gt;Recursão&lt;&#x2F;li&gt;
+&lt;li&gt;Uso pesado de &lt;del&gt;drogas&lt;&#x2F;del&gt; teorias matemáticas&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;E muitas outras coisas...&lt;&#x2F;p&gt;
+&lt;p&gt;Algumas destas coisas podem até aparecer em PHP. Funções de primeira classe entraram na linguagem com closures na versão 5.3. Outras você definitivamente não terá como &lt;strong&gt;imutabilidade&lt;&#x2F;strong&gt; que é um aspecto gigantesco de FP.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;e-como-isto-e-melhor&quot;&gt;E como isto é melhor?&lt;&#x2F;h2&gt;
+&lt;p&gt;Agora você já tem alguma ideia do que é FP e como ela se difere de POO mas ela é melhor? Sim e não. Algumas pessoas vão dizer que cada paradigma tem seu lugar no mundo e estão tentando resolver problemas diferentes, mas no final das contas, FP oferece uma forma diferente de se olhar para programação.&lt;&#x2F;p&gt;
+&lt;p&gt;Ao invés de pensar em objetos, seus atributos e métodos, você pensa apenas em dados e em como transformá-los com funções. É uma perspectiva mais simples mas muito poderosa.&lt;&#x2F;p&gt;
+&lt;p&gt;Sem fortes padrões e consistência, programas OO podem rapidamente se tornar insustentáveis. Com FP você pode evitar muitas destas armadilhas escrevendo um código mais simples, que é mais fácil de escrever e refatorar. Não me entanda mal, você ainda pode estragar tudo usando FP mas alguns dos problemas mais comuns na arquitetura de programas com OO simplesmente não existem em FP.&lt;&#x2F;p&gt;
+&lt;p&gt;Existem inúmeros artigos por aí que vão te mostrar como FP pode ser um paradigma forte e eu sugiro que você dê uma olhada. Sei que existem muitas pontas soltas neste artigo mas eu estou apenas tentando fazer uma intrudução interessante. A ideia é mergulhar mais fundo em alguns destes conceitos em artigos futuros.&lt;&#x2F;p&gt;
+&lt;p&gt;Me avise se você estiver interessado em algum assunto específico. Eu posso falar sobre ele num próximo artigo.&lt;&#x2F;p&gt;
+&lt;p&gt;Obrigado pela leitura!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Stripe</title>
+		<published>2013-05-17T00:00:00+00:00</published>
+		<updated>2013-05-17T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/stripe/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/stripe/</id>
+		<content type="html">&lt;p&gt;Isso já faz muito tempo, quase um ano e meio, mas eu me lembrei desse episódio hoje e quis contar aqui, porque foi muito legal.&lt;&#x2F;p&gt;
+&lt;p&gt;Na época, o serviço &lt;a href=&quot;https:&#x2F;&#x2F;stripe.com&#x2F;&quot;&gt;Stripe&lt;&#x2F;a&gt;, uma solução de pagamentos para desenvolvedores, tinha sido lançado a pouco tempo.  Na hora eu fiquei sedento por um negócio assim funcionando no Brasil.  Aí eu resolvi mandar um e-mail pra eles.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Subject: Please, come to Brazil! I&#x27;m beggin&#x27; you!&lt;&#x2F;p&gt;
+&lt;p&gt;Please, I&#x27;m literally begging!&lt;&#x2F;p&gt;
+&lt;p&gt;--
+Éber Freitas Dias&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Junto à mensagem eu mandei essa foto...&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2013-05-17-stripe&#x2F;help.jpg&quot; alt=&quot;Stripe&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Mal sabia eu que pouquíssimo tempo depois de ter mandado a mensagem eles se responderiam.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Subject: Re: Please, come to Brazil! I&#x27;m beggin&#x27; you!&lt;&#x2F;p&gt;
+&lt;p&gt;Hi Eber,&lt;&#x2F;p&gt;
+&lt;p&gt;We&#x27;re working on it!&lt;&#x2F;p&gt;
+&lt;p&gt;Best,
+Patrick&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;Junto com esta foto...&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;imgs&#x2F;2013-05-17-stripe&#x2F;stripe.jpg&quot; alt=&quot;Stripe&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Algumas coisas legais nessa história:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Eles me responderam no mesmo dia, isso foi demais;&lt;&#x2F;li&gt;
+&lt;li&gt;O próprio fundador do Stripe me respondeu, o que também foi bem legal;&lt;&#x2F;li&gt;
+&lt;li&gt;A foto no e-mail foi a cereja no bolo. Dei muita risada quando vi.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Mesmo sem os caras oferecerem o serviço aqui no Brasil, eu já tive uma boa experiência com eles. Isso diz alguma coisa a respeito da empresa. É claro que na época eles eram bem menores e talvez tenham se surpreendido com a minha mensagem+foto. Talvez hoje a resposta não seria exatamente assim, mas quero acreditar que seria bem similar.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Experimentando o DuckDuckGo</title>
+		<published>2012-02-18T00:00:00+00:00</published>
+		<updated>2012-02-18T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/experimentando-o-duckduckgo/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/experimentando-o-duckduckgo/</id>
+		<content type="html">&lt;p&gt;No início desta semana troquei o mecânismo de busca padrão no meu navegador para o &lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;duckduckgo.com&#x2F;&quot;&gt;DuckDuckGo&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Pra quem não sabe, o &lt;strong&gt;DDG&lt;&#x2F;strong&gt; (DuckDuckGo) é um novo mecânismo de busca que se preocupa com minha privacidade. Toda a história é muito longa, mas basicamente, quando você usa o DDG, ninguém (nem eles mesmos) sabe pelo que você buscou e os sites pra onde você vai a partir dele também não conseguem visualizar de onde você veio. &lt;a href=&quot;http:&#x2F;&#x2F;donttrack.us&#x2F;&quot;&gt;Neste site&lt;&#x2F;a&gt; eles explicam tudo isso muito direitinho.&lt;&#x2F;p&gt;
+&lt;p&gt;Outra coisa diferente que eles fazem é não personalizar os resultados de acordo com seus históricos de busca ou vida na internet, coisa que o Google anda fazendo com muita frequência (explicado muito bem &lt;a href=&quot;http:&#x2F;&#x2F;dontbubble.us&#x2F;&quot;&gt;aqui&lt;&#x2F;a&gt;) e que eu, particularmente, não gosto.&lt;&#x2F;p&gt;
+&lt;p&gt;É claro que por ser um mecânismo novo e (ainda) pequeno ele não é tão poderoso quanto o Google, mas aos poucos você aprende a utilizá-lo com tanta eficiência quanto.&lt;&#x2F;p&gt;
+&lt;p&gt;Outra grande facilidade do DDG são os !Bangs. É basicamente um atalho para você realizar buscas em quaisquer outros sites, inclusive Google ou Bing, então é bem fácil, caso eu não encontre nenhum resultado satisfatório no DDG, fazer a mesma busca no Google, ex.: &amp;quot;!g meu termo de busca&amp;quot;. Você também pode buscar diretamente pelo Google Images (!gi), Amazon (!a), GitHub (!gh) e até algumas outras coisas mais nerds como !php, !mysql e etc. Para ter uma idéia total de todos os !Bangs disponíveis é só ver &lt;a href=&quot;https:&#x2F;&#x2F;duckduckgo.com&#x2F;bang.html&quot;&gt;este link&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Enfim, estes são só alguns dos recursos legais do DDG. Existem muitos outros, todos muito legais e divertidos. Com tantas facilidades dentro de uma ferramenta só, acho que não vou sentir tanta falta de ter o Google como mecânismo padrão, já que posso usá-lo de forma até mais segura via DDG.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Meu ambiente de trabalho</title>
+		<published>2011-07-01T00:00:00+00:00</published>
+		<updated>2011-07-01T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/meu-ambiente-de-trabalho/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/meu-ambiente-de-trabalho/</id>
+		<content type="html">&lt;p&gt;Por um tempo eu fiquei usando Linux como meu sistema operacional. Sem dual boot nem nada, só Linux (Ubuntu). Depois de passar um bom tempo usando descobri que, por mais que eu adore o Linux e suas ferramentas, ele só brilha mesmo na linha de comando. Linux para desktop ainda está longe de ser ideal e eu me vi sentindo saudades do Windows, principalmente depois de ter experimentado o Win7, que está excelente.&lt;&#x2F;p&gt;
+&lt;p&gt;Tomei a dura decisão de que eu devia voltar para o Windows, mas agora existia um problema. Todo o meu ambiente de trabalho estava focado no Linux e eu precisava arranjar um jeito de conseguir trabalhar com as duas plataformas em conjunto.  Entrei no Forrst e perguntei se era possível criar uma VM e trabalhar nela com as aplicações que eu precisava mas realizar toda a interface através do Windows.  Foi aí que alguém me sugeriu o &lt;a href=&quot;http:&#x2F;&#x2F;vagrantup.com&#x2F;&quot;&gt;Vagrant&lt;&#x2F;a&gt;!&lt;&#x2F;p&gt;
+&lt;p&gt;De cara eu me apaixonei pelo Vagrant. Achei a idéia sensacional. Basicamente ela é uma ferramenta de linha de comando que te permite configurar maquinas virtuais com extrema facilidade e usá-las para desenvolver dentro do seu sistema operacional de escolha. Pode ser Windows, OS X, o próprio linux, o que for, bastando ser possivel instalar Ruby e VirtualBox. O legal é que eu poderia reproduzir o servidor virtual que eu realmente vou usar em produção no meu ambiente de desenvolvimento e trabalhar sem me preocupar em adequar os ambientes. O Vagrant me permitia configurar uma pasta local a ser compartilhada na VM e eu poderia fazer todo o desenvolvimento a partir do próprio Windows.&lt;&#x2F;p&gt;
+&lt;p&gt;O Vagrant é ótimo! Ainda mais se você aprender a usar &lt;a href=&quot;http:&#x2F;&#x2F;www.puppetlabs.com&#x2F;puppet&#x2F;introduction&#x2F;&quot;&gt;Puppet&lt;&#x2F;a&gt; ou &lt;a href=&quot;http:&#x2F;&#x2F;www.opscode.com&#x2F;chef&#x2F;&quot;&gt;Chef&lt;&#x2F;a&gt; para gerenciar as dependências dos pacotes utilizados na máquina, mas existiam alguns problemas que eu não conseguia resolver. O principal &amp;quot;problema&amp;quot; é que o servidor tinha que usar a porta 8080, ou qualquer outra porta acima de 1024 (acho que é isso), por alguma limitação de não sei o que. Isso acabava me atrapalhando um bocado na hora de trabalhar com URLs a partir do meu próprio sistema operacional uma vez que o meu framework às vezes não levava isso em consideração.&lt;&#x2F;p&gt;
+&lt;p&gt;Eu tentei então montar meu próprio Vagrant. Criei uma nova VM no VirtualBox com uma imagem do Ubuntu Server Edition configurando a rede para funcionar em modo bridge. Depois disso editei o arquivo &lt;strong&gt;&#x2F;etc&#x2F;network&#x2F;interfaces&lt;&#x2F;strong&gt; de forma que ele ficasse com o seguinte conteúdo:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+# iface eth0 inet dhcp
+iface eth0 inet static
+    address 192.168.1.200
+    netmask 255.255.255.0
+    network 192.168.1.1
+    broadcast 192.168.1.255
+    gateway 192.168.1.1
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Ao reiniciar a VM agora ela tinha um IP local fixo na minha rede: 192.168.1.200.&lt;&#x2F;p&gt;
+&lt;p&gt;Depois eu criei uma pasta compartilhada no VirtualBox e instalei os Add-ons do VirtualBox na VM para poder usar a nova pasta. Criei um arquivo chamado &lt;strong&gt;.&#x2F;mount&lt;&#x2F;strong&gt; com alguns comandos que me ajudavam a montar e remontar a pasta quando precisasse. O conteúdo do arquivo é o seguinte:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;#!&#x2F;bin&#x2F;bash
+sudo umount &#x2F;home&#x2F;eber&#x2F;mnt
+sudo mount -t vboxsf folder &#x2F;home&#x2F;eber&#x2F;mnt
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Eu desmonto a pasta antes de montar porque por algum motivo bizarro, os arquivos estáticos (js, css e etc) quebram quando eu atualizo seus conteúdos mas não dou um refresh na pasta montada. Assim fica fácil fazer o refresh sempre que for preciso.&lt;&#x2F;p&gt;
+&lt;p&gt;Em seguida eu precisava tornar simples iniciar e finalizar a máquina virtual no Windows. Eu dei uma olhada no codigo do Vagrant e perguntei por aí e consegui fazer dois arquivinhos que me ajudam nisso. Um deles é o &lt;strong&gt;start.bat&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;c:\Program Files\Oracle\VirtualBox\VBoxManage.exe&amp;quot; startvm Ubuntu --type headless
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;E o outro é o &lt;strong&gt;stop.bat&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;c:\Program Files\Oracle\VirtualBox\VBoxManage.exe&amp;quot; controlvm Ubuntu poweroff
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A máquina é iniciada com o tipo headless, ou seja, roda &amp;quot;em background&amp;quot; (embora uma janela do CMD do Windows fique aberta, o que não é tão background assim).&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;[EDIT 08&#x2F;08&#x2F;2011]&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;O único problema de usar o método acima é que, na verdade, o processo da VM não é realmente &lt;em&gt;headless&lt;&#x2F;em&gt; no Windows, já uma janela da linha de comando fica aberta. Eu procurei por alternativas e achei um &lt;a href=&quot;http:&#x2F;&#x2F;vbox.innotek.de&#x2F;ticket&#x2F;3549&quot;&gt;ticket&lt;&#x2F;a&gt; no tracker do VBox falando exatamente sobre isso. Depois de ler tudo, existia a sugestão de usar um VBS (Visual Basic Script) pra abrir a VM. Aí vai:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;Set objShell = WScript.CreateObject(&amp;quot;WScript.Shell&amp;quot;)
+objShell.Run &amp;quot;&amp;quot;&amp;quot;C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe&amp;quot;&amp;quot; --startvm Ubuntu --vrdp=off&amp;quot;, 0
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Se o nome de sua VM for composto, tipo &amp;quot;Ubuntu Server&amp;quot; você só precisa colocar o nome entre duas aspas:&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;Set objShell = WScript.CreateObject(&amp;quot;WScript.Shell&amp;quot;)
+objShell.Run &amp;quot;&amp;quot;&amp;quot;C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe&amp;quot;&amp;quot; --startvm &amp;quot;&amp;quot;Ubuntu Server&amp;quot;&amp;quot; --vrdp=off&amp;quot;, 0
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;O que o script faz realmente eu não sei, porque não entendo nada de VBS, mas funciona :)&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;[&#x2F;EDIT]&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Pronto! Agora eu consegui ter um ambiente de trabalho muito similar ao que eu tenho em produção e poderia usar o servidor web na porta 80 sem problemas. Tudo o que eu fiz depois disso foi configurar um acesso via SSH usando o Putty e adicionar entradas no arquivo &lt;strong&gt;c:\Windows\System32\Drivers\etc\hosts&lt;&#x2F;strong&gt; apontando para o IP da máquina virtual. Como o IP é fixo, fica fácil manter a relação.&lt;&#x2F;p&gt;
+&lt;p&gt;Parece que é muito mais trabalho que usar Vagrant e não têm os benefícios de redistribuição que o Vagrant tem, por isso dependendo da forma como você trabalha, usar Vagrant é muito melhor e mais prático. Mas foi divertido configurar este ambiente e tem funcionado perfeitamente pra mim desde então.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>De volta ao cliente web do Google Mail</title>
+		<published>2011-06-30T00:00:00+00:00</published>
+		<updated>2011-06-30T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/de-volta-ao-cliente-web-do-google-mail/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/de-volta-ao-cliente-web-do-google-mail/</id>
+		<content type="html">&lt;p&gt;A algum tempo atras o Google começou a tratar as contas do Google Apps como uma conta comum de forma que não era possível estar logado no meu e-mail @gmail.com e numa conta do Apps ao mesmo tempo.&lt;&#x2F;p&gt;
+&lt;p&gt;No começo isso foi bem ruim. Eu já estava acostumado a deixar várias abas abertas no meu browser com as caixas de e-mail que eu usava, mas agora isso não seria possível. Eu comecei então a procurar um cliente desktop de e-mails legal, que pudesse substituir o cliente web do Google, tarefa difícil.&lt;&#x2F;p&gt;
+&lt;p&gt;Depois de muito caçar eu achei o Postbox, um ótimo cliente de e-mail baseado no Thunderbird. O problema é que, aparentemente, nenhum cliente de e-mails consegue superar o cliente web do Google. Eu descobri hoje que dá pra você; fazer login em mais de uma conta do Google, o que me deixa estar, ao mesmo tempo, conectado a diversas caixas de e-mail  diferentes.&lt;&#x2F;p&gt;
+&lt;p&gt;Só procurei descobrir isso porque eu realmente queria voltar a usar o cliente do Google. O Postbox é bom, mas ficou faltando algumas coisas:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;O Postbox organiza as mensagens em conversas, mas não mostra as mensagens que você enviou, só as que a outra pessoa mandou. Isso é muito chato quando você tenta acompanhar uma conversa de verdade.&lt;&#x2F;li&gt;
+&lt;li&gt;O Postbox não consegue trabalhar direito com e-mails encaminhados ou colocando as mensagens antigas como citações. Ele peca um pouco por tentar fazer demais (colocar avatar dos participantes na conversa, estilizar a citação do e-mail sendo respondido e etc.).&lt;&#x2F;li&gt;
+&lt;li&gt;Não é tão fácil organizar as mensagens em labels (no caso, pastas) e os filtros fazem muita falta.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Bom, devem existir dezenas de outros motivos, mas eu estou feliz que agora posso voltar a usar o cliente de e-mails do Google. Se você quiser saber como usar multiplas contas no mesmo browser, o Google tem um artigo &lt;a href=&quot;http:&#x2F;&#x2F;www.google.com&#x2F;support&#x2F;accounts&#x2F;bin&#x2F;answer.py?answer=181599&quot;&gt;aqui&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Braintest</title>
+		<published>2007-10-21T00:00:00+00:00</published>
+		<updated>2007-10-21T00:00:00+00:00</updated>
+		<link href="http://www.eberfdias.com/blog/braintest/" type="text/html"/>
+		<id>http://www.eberfdias.com/blog/braintest/</id>
+		<content type="html">&lt;p&gt;Vi &lt;a href=&quot;http:&#x2F;&#x2F;mindmedia.com&#x2F;braintest.html&quot;&gt;este teste&lt;&#x2F;a&gt; no blog do &lt;a href=&quot;http:&#x2F;&#x2F;anderson.the-silvas.com&#x2F;&quot;&gt;Anderson&lt;&#x2F;a&gt; e resolvi fazer. Olha o meu resultado:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eber, you are somewhat left-hemisphere dominant and show a preference for
+visual learning, although not extreme in either characteristic. You probably
+tend to do most things in moderation, but not always. Your left-hemisphere
+dominance implies that your learning style is organized and structured, detail
+oriented and logical. Your visual preference, though, has you seeking
+stimulation and multiple data. Such an outlook can overwhelm structure and
+logic and create an almost continuous state of uncertainty and agitation. You
+may well suffer a feeling of continually trying to &amp;quot;catch up&amp;quot; with yourself.
+Your tendency to be organized and logical and attend to details is reasonably
+well-established which should afford you success regardless of your chosen
+field of endeavor. You can &amp;quot;size up&amp;quot; situations and take in information
+rapidly. However, you must then subject that data to being classified and
+organized which causes you to &amp;quot;lose touch&amp;quot; with the immediacy of the problem.
+Your logical and methodical nature hamper you in this regard though in the
+long run it may work to your advantage since you &amp;quot;learn from experience&amp;quot; and
+can go through the process more rapidly on subsequent occasions. You remain
+predominantly functional in your orientation and practical. Abstraction and
+theory are secondary to application. In keeping with this, you focus on
+details until they manifest themselves in a unique pattern and only then work
+with the &amp;quot;larger whole.&amp;quot;  With regards to your career choices, you have a
+mentality that would be good as a scientist, coach, athlete, design
+consultant, or an engineering technician. You can &amp;quot;see where you want to go&amp;quot;
+and even be able to &amp;quot;tell yourself,&amp;quot; but find that you are &amp;quot;fighting yourself&amp;quot;
+at the darndest times.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;As porcentagens foram as seguintes:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Auditory : 27%&lt;&#x2F;p&gt;
+&lt;p&gt;Visual : 72%&lt;&#x2F;p&gt;
+&lt;p&gt;Left : 68%&lt;&#x2F;p&gt;
+&lt;p&gt;Right : 31%&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+	</entry>
+</feed>
