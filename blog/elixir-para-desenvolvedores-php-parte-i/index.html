@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        
+        Elixir para desenvolvedores PHP - Paradigma de programação
+        
+    </title>
+    <link rel="alternate" href="/atom.xml" type="application/atom+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+    <!-- Panelbear Analytics - We respect your privacy -->
+    <script async src="https://cdn.panelbear.com/analytics.js?site=1fTA9gU3VFx"></script>
+    <script>
+        window.panelbear = window.panelbear || function () {(window.panelbear.q = window.panelbear.q || []).push(arguments);};
+        panelbear('config', {site: '1fTA9gU3VFx'});
+    </script>
+</head>
+
+<body>
+    
+    <p><a href="http://www.eberfdias.com/blog/">&larr; ver outras postagens</a></p>
+
+    <h1>Elixir para desenvolvedores PHP - Paradigma de programação</h1>
+
+    <p><small>01&#x2F;10&#x2F;2019</small></p>
+
+    <p>Quando quero aprender algo novo tento achar algum material comparando o que quero aprender com algo que eu já conheça. Assim posso medir os pros e contras e decidir se devo investir meu tempo nisso.</p>
+<p>Eu venho do mundo do PHP e me apaixonei por Elixir então minha ideia aqui é comparar alguns aspectos destas linguagens e mostrar como elas são diferentes (ou similares) e talvez te ajudar a tomar a decisão de aprender mais sobre ela. Espero te mostrar que Elixir é uma linguagem divertida de se trabalhar!</p>
+<p>Aliás, sou iniciante no mundo Elixir. Esta é a perspectiva de alguém escrevendo enquanto aprende a linguagem então leve isto em consideração.</p>
+<h2 id="elixir-e-uma-linguagem-funcional">Elixir é uma linguagem funcional</h2>
+<p>A primeira grande diferença entre PHP e Elixir é que Elixir é uma linguagem funcional pura. PHP, no entanto, é uma linguagem multi-paradigma, onde você pode resolver problemas usando diferentes paradigmas embora POO (programação orientada a objetos) seja bem dominante hoje em dia.</p>
+<p>E o que FP (functional programming ou programação funcional) significa? A teoria pode ficar bem pesada e talvez você queira ler o artigo na <a href="https://en.wikipedia.org/wiki/Functional_programming">Wikipedia</a> para uma descrição mais elaborada, mas em resumo e para os propósitos desta comparação, significa que <strong>não existem objetos</strong>.</p>
+<p>Um objeto em POO é (além de outras coisas) quando você junta dados e funcionalidades: no mesmo objeto você tem o estado e os métodos para afetar este estado.</p>
+<p>Mas em FP estas coisas são separadas e tudo o que você tem são funções que manipulam dados. Vamos dar uma olhada em como isso se parece:</p>
+<pre data-lang="php" style="background-color:#fdf6e3;color:#657b83;" class="language-php "><code class="language-php" data-lang="php"><span>&lt;?php
+</span><span>
+</span><span style="color:#268bd2;">class </span><span style="color:#b58900;">User </span><span style="color:#586e75;">extends </span><span style="color:#268bd2;">DataLayer
+</span><span>{
+</span><span>  </span><span style="color:#586e75;">private </span><span style="color:#859900;">$</span><span style="color:#268bd2;">name</span><span>;
+</span><span>  </span><span style="color:#586e75;">private </span><span style="color:#859900;">$</span><span style="color:#268bd2;">email</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#586e75;">public </span><span style="color:#268bd2;">function </span><span style="color:#859900;">__construct</span><span>(</span><span style="color:#268bd2;">string </span><span style="color:#859900;">$</span><span style="color:#268bd2;">name</span><span>, </span><span style="color:#268bd2;">string </span><span style="color:#859900;">$</span><span style="color:#268bd2;">email</span><span>)
+</span><span>  {
+</span><span>    </span><span style="color:#859900;">$</span><span style="color:#d33682;">this</span><span>-&gt;</span><span style="color:#268bd2;">name </span><span>= </span><span style="color:#859900;">$</span><span style="color:#268bd2;">name</span><span>;
+</span><span>    </span><span style="color:#859900;">$</span><span style="color:#d33682;">this</span><span>-&gt;</span><span style="color:#268bd2;">email </span><span>= </span><span style="color:#859900;">$</span><span style="color:#268bd2;">email</span><span>;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#859900;">$</span><span style="color:#268bd2;">user </span><span>= </span><span style="color:#dc322f;">new </span><span style="color:#859900;">User</span><span>(</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">John Doe</span><span style="color:#839496;">&#39;</span><span>, </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">john.doe@example.com</span><span style="color:#839496;">&#39;</span><span>);
+</span><span>
+</span><span style="color:#859900;">$</span><span style="color:#268bd2;">user</span><span>-&gt;</span><span style="color:#b58900;">save</span><span>();
+</span></code></pre>
+<p>O equivalente em Elixir do código anterior seria algo mais ou menos assim:</p>
+<pre data-lang="elixir" style="background-color:#fdf6e3;color:#657b83;" class="language-elixir "><code class="language-elixir" data-lang="elixir"><span style="color:#859900;">defmodule </span><span style="color:#b58900;">User </span><span style="color:#859900;">do
+</span><span>  </span><span style="color:#859900;">defstruct </span><span style="color:#cb4b16;">name: </span><span style="color:#b58900;">nil</span><span>, </span><span style="color:#cb4b16;">email: </span><span style="color:#b58900;">nil
+</span><span>
+</span><span>  </span><span style="color:#859900;">def </span><span style="color:#b58900;">save</span><span>(%</span><span style="color:#b58900;">User</span><span>{} = user) </span><span style="color:#859900;">do
+</span><span>    </span><span style="color:#b58900;">Repo</span><span>.insert(user)
+</span><span>  </span><span style="color:#859900;">end
+</span><span style="color:#859900;">end
+</span><span>
+</span><span>%</span><span style="color:#b58900;">User</span><span>{</span><span style="color:#cb4b16;">name: </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">John Doe</span><span style="color:#839496;">&quot;</span><span>, </span><span style="color:#cb4b16;">email: </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">john.doe@example.com</span><span style="color:#839496;">&quot;</span><span>}
+</span><span style="color:#859900;">|&gt; </span><span style="color:#b58900;">User</span><span>.save()
+</span></code></pre>
+<p>Existe muita coisa acontecendo aqui. A sintaxe é um pouco alien se comparada à do PHP. Sem colchetes, e o que é aquela atribuição na definição da função? Bem, chegaremos lá mas só pra esclarecer, aquilo <strong>não é</strong> uma atribuição.</p>
+<p>O que fizemos aqui foi criar uma <code>struct</code> que é um <code>map</code> glorificado. Um <code>map</code> é similar a um array associativo em PHP onde você tem chaves e valores. A diferença entre um <code>map</code> e uma <code>struct</code> é que com a <code>struct</code> você pode estruturar como seus dados devem se parecer, definindo chaves específicas e até mesmo valores padrão (você pode estar pensando agora &quot;uhm, isso parece um objeto&quot; mas <strong>não é</strong>, são apenas dados).</p>
+<p>Outra coisa que você deve ter percebido é que não temos nenhum tipo de herança. No código PHP fica pressuposto que o método <code>save</code> vem da classe <code>DataLayer</code> da qual a nossa classe <code>User</code> extende mas no código Elixir a função <code>save</code> está apenas chamando uma outra função de um outro módulo (<code>Repo</code> neste caso) para persistir os dados no nosso banco.</p>
+<p>Em FP você tem dados e funções por todos os lados e seu trabalho é <strong>compor</strong> estas coisas para criar outras coisas maiores que também podem compor outras coisas.</p>
+<h2 id="mas-php-tambem-tem-funcoes">Mas PHP também tem funções...</h2>
+<p>O código Elixir também poderia ser traduzido para PHP mais ou menos assim:</p>
+<pre data-lang="php" style="background-color:#fdf6e3;color:#657b83;" class="language-php "><code class="language-php" data-lang="php"><span>&lt;?php
+</span><span>
+</span><span style="color:#268bd2;">function </span><span style="color:#b58900;">save</span><span>(</span><span style="color:#268bd2;">array </span><span style="color:#859900;">$</span><span style="color:#268bd2;">user</span><span>): </span><span style="color:#268bd2;">bool
+</span><span>{
+</span><span>  </span><span style="color:#859900;">DataLayer</span><span>::</span><span style="color:#b58900;">persist</span><span>(</span><span style="color:#859900;">$</span><span style="color:#268bd2;">user</span><span>);
+</span><span>}
+</span><span>
+</span><span style="color:#859900;">$</span><span style="color:#268bd2;">user </span><span>= [</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">name</span><span style="color:#839496;">&#39; </span><span style="color:#859900;">=&gt; </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">John Doe</span><span style="color:#839496;">&#39;</span><span>, </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">email</span><span style="color:#839496;">&#39; </span><span style="color:#859900;">=&gt; </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">john.doe@example.com</span><span style="color:#839496;">&#39;</span><span>];
+</span><span style="color:#b58900;">save</span><span>(</span><span style="color:#859900;">$</span><span style="color:#268bd2;">user</span><span>);
+</span></code></pre>
+<p>Então PHP pode ser funcional certo? Bom, certo... Eu acho? Como disse no início, Elixir é uma linguagem funcional <strong>pura</strong>. Isso siginifica que não existem &quot;atalhos&quot; pra fora deste mundo quando usamos Elixir.</p>
+<p>Em PHP você pode desenvolver usando um &quot;estilo funcional&quot; mas nunca será funcional de verdade. Você pode ficar &quot;preguiçoso&quot; e apenas tirar vantagem da natureza multi-paradigma da linguagem para resolver alguns problemas e, na realidade, seria melhor assim pois PHP não é uma linguagem funcional.</p>
+<p>E FP não se caracteriza apenas pela ausência de objetos. Se você teve a curiosidade de ler aquele artigo da Wikipedia viu que este paradigma inclui outras coisas como:</p>
+<ul>
+<li>Funções de primeira classe</li>
+<li>Funções totais</li>
+<li>Funções puras</li>
+<li>Imutabilidade</li>
+<li>Recursão</li>
+<li>Uso pesado de <del>drogas</del> teorias matemáticas</li>
+</ul>
+<p>E muitas outras coisas...</p>
+<p>Algumas destas coisas podem até aparecer em PHP. Funções de primeira classe entraram na linguagem com closures na versão 5.3. Outras você definitivamente não terá como <strong>imutabilidade</strong> que é um aspecto gigantesco de FP.</p>
+<h2 id="e-como-isto-e-melhor">E como isto é melhor?</h2>
+<p>Agora você já tem alguma ideia do que é FP e como ela se difere de POO mas ela é melhor? Sim e não. Algumas pessoas vão dizer que cada paradigma tem seu lugar no mundo e estão tentando resolver problemas diferentes, mas no final das contas, FP oferece uma forma diferente de se olhar para programação.</p>
+<p>Ao invés de pensar em objetos, seus atributos e métodos, você pensa apenas em dados e em como transformá-los com funções. É uma perspectiva mais simples mas muito poderosa.</p>
+<p>Sem fortes padrões e consistência, programas OO podem rapidamente se tornar insustentáveis. Com FP você pode evitar muitas destas armadilhas escrevendo um código mais simples, que é mais fácil de escrever e refatorar. Não me entanda mal, você ainda pode estragar tudo usando FP mas alguns dos problemas mais comuns na arquitetura de programas com OO simplesmente não existem em FP.</p>
+<p>Existem inúmeros artigos por aí que vão te mostrar como FP pode ser um paradigma forte e eu sugiro que você dê uma olhada. Sei que existem muitas pontas soltas neste artigo mas eu estou apenas tentando fazer uma intrudução interessante. A ideia é mergulhar mais fundo em alguns destes conceitos em artigos futuros.</p>
+<p>Me avise se você estiver interessado em algum assunto específico. Eu posso falar sobre ele num próximo artigo.</p>
+<p>Obrigado pela leitura!</p>
+
+
+</body>
+
+</html>

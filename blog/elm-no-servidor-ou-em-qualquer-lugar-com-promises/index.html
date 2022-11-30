@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        
+        Elm no servidor (ou em qualquer lugar) com promises
+        
+    </title>
+    <link rel="alternate" href="/atom.xml" type="application/atom+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+    <!-- Panelbear Analytics - We respect your privacy -->
+    <script async src="https://cdn.panelbear.com/analytics.js?site=1fTA9gU3VFx"></script>
+    <script>
+        window.panelbear = window.panelbear || function () {(window.panelbear.q = window.panelbear.q || []).push(arguments);};
+        panelbear('config', {site: '1fTA9gU3VFx'});
+    </script>
+</head>
+
+<body>
+    
+    <p><a href="http://www.eberfdias.com/blog/">&larr; ver outras postagens</a></p>
+
+    <h1>Elm no servidor (ou em qualquer lugar) com promises</h1>
+
+    <p><small>04&#x2F;01&#x2F;2021</small></p>
+
+    <p>Elm foi criado pra rodar no browser, mas sempre rola de alguém perguntar como rodar Elm no servidor.</p>
+<p>No meu trabalho atual, a gente precisava sincronizar diversos clientes e persistir o estado compartilhado entre eles em um só lugar, então pensamos que seria uma boa ideia se o servidor agisse como mais um cliente que pudesse persistir este estado em um local centralizado.</p>
+<p>Pra isso a gente criou um servidor com Node/Express que era uma grande gambiarra.</p>
+<p>Num ambiente de servidor, na maioria das vezes você vai ter um request/pedido e uma response/resposta amarrados. Você pede algo e recebe o que pediu ou um erro. Não importa, pra cada request existe uma resposta.</p>
+<p>Mas Elm não funciona assim se você precisa falar com o mundo externo. Sim, você pode usar <a href="https://guide.elm-lang.org/interop/ports.html">ports</a> pra comunicação externa, mas ports usam o actor model de passagem de mensagens. Então ao invés de um request/response como você teria em um servidor, você só pode enviar e receber mensagens. Pode parecer a mesma coisa mas não é. Você pode receber uma mensagem sem nunca ter requisitado uma em primeiro lugar. Ou enviar uma mensagem sem a necessidade de esperar outra de volta. Você pode mandar uma mensagem e receber inúmeras outras de uma só vez. Não existe ligação entre as mensagens enviadas e recebidas, e este é um fator que torna Elm impróprio para a criação de servidores onde o request/response são sempre amarrados.</p>
+<p>Depois de procurar por soluções melhores eu encontrei <a href="https://discourse.elm-lang.org/t/imitating-synchronicity-with-ports/1930">este post</a> nos fóruns onde o usuário <a href="https://discourse.elm-lang.org/u/joakin">joakin</a> fez uma sugestão engenhosa: basta enviar o objeto de <strong>response</strong> do lado do JavaScript através do port e mandá-lo de volta com a resposta de qualquer coisa que tenha sido requisitada. Aí é só usar este objeto para enviar a resposta apropriada para o client correto e pronto. Você pode ver um exemplo dessa abordagem <a href="https://github.com/joakin/node-elm-server">neste repositório exemplo</a>.</p>
+<p>Ta aí uma coisa que eu não sabia: você pode enviar qualquer valor JavaScript como um <a href="https://package.elm-lang.org/packages/elm/json/latest/Json-Decode#Value"><code>Json.Decode.Value</code></a> pro Elm, até mesmo funções. Claro que não será possível fazer muita coisa com elas dentro do Elm mas, neste caso, ajuda a amarrar uma chamada de função à mensagem que retornaremos.</p>
+<p>A ideia é ótima e nos ajudou a amarrar o fluxo de request/response. Mas como poderíamos testar esta integração? Era mais fácil pular toda a parte do servidor e focar na interoperação entre Elm e Node diretamente. Ou pior, e se o software que estivéssemos escrevendo não fosse um servidor Express mas qualquer outra coisa? Foi aí que meu chefe e colega de trabalho <a href="https://twitter.com/nateabele">Nate</a> sugeriu que usássemos promises. Ao invés de enviar o objeto de response do Express pro Elm, podemos enviar a função de resolve de uma promise!</p>
+<p>Eu fiz um fork do repositório exemplo com estas alterações. Você pode checar <a href="https://github.com/eberfreitas/node-elm-server">aqui</a>.</p>
+<p>Do <a href="https://github.com/eberfreitas/node-elm-server/blob/master/src/Server.elm">lado do Elm</a>, nada de significativo mudou. Eu fiz apenas umas alterações nos nomes das coisas pra melhor refletir a nova natureza da interoperação com com o código JavaScript. Mas além disso, não precisamos fazer outras alterações já que, tanto o objeto response do Express quanto a função resolve da promise são apenas <code>Json.Decode.Value</code>s pro Elm.</p>
+<p>A mágica real acontece no <a href="https://github.com/eberfreitas/node-elm-server/blob/master/index.js">código JavaScript</a>. O código ficou um pouco mais complexo mas conseguimos desacoplar o código Elm e os ports do Express, tornando possível usar esta abordagem em praticamente qualquer lugar. Aqui esta a parte que faz tudo funcionar:</p>
+<pre data-lang="js" style="background-color:#fdf6e3;color:#657b83;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#268bd2;">http
+</span><span>  .</span><span style="color:#b58900;">createServer</span><span>((</span><span style="color:#268bd2;">request</span><span>, </span><span style="color:#268bd2;">res</span><span>) </span><span style="color:#268bd2;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#859900;">new </span><span style="color:#b58900;">Promise</span><span>(</span><span style="color:#268bd2;">resolve =&gt; app</span><span>.</span><span style="color:#268bd2;">ports</span><span>.</span><span style="color:#268bd2;">onRequest</span><span>.</span><span style="color:#859900;">send</span><span>({ </span><span style="color:#268bd2;">request</span><span>, </span><span style="color:#268bd2;">resolve </span><span>}))
+</span><span>      .</span><span style="color:#859900;">then</span><span>(({ </span><span style="color:#268bd2;">status</span><span>, </span><span style="color:#268bd2;">response </span><span>}) </span><span style="color:#268bd2;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#268bd2;">res</span><span>.</span><span style="color:#268bd2;">statusCode </span><span>= </span><span style="color:#268bd2;">status</span><span>;
+</span><span>        </span><span style="color:#268bd2;">res</span><span>.</span><span style="color:#b58900;">end</span><span>(</span><span style="color:#268bd2;">response</span><span>);
+</span><span>      });
+</span><span>  })
+</span><span>  .</span><span style="color:#b58900;">listen</span><span>(</span><span style="color:#6c71c4;">3000</span><span>);
+</span><span>
+</span><span style="color:#268bd2;">app</span><span>.</span><span style="color:#268bd2;">ports</span><span>.</span><span style="color:#268bd2;">resolve</span><span>.</span><span style="color:#b58900;">subscribe</span><span>(([{ </span><span style="color:#268bd2;">resolve </span><span>}, </span><span style="color:#268bd2;">status</span><span>, </span><span style="color:#268bd2;">response</span><span>]) </span><span style="color:#268bd2;">=&gt; </span><span>{
+</span><span>  </span><span style="color:#b58900;">resolve</span><span>({ </span><span style="color:#268bd2;">status</span><span>, </span><span style="color:#268bd2;">response </span><span>});
+</span><span>});
+</span></code></pre>
+<p>Sendo assim, é possível usar Elm no servidor, e eu diria que é possível usar esta abordagem em qualquer lugar onde você precise de uma integração com request/response amarradas e Node esteja disponível. <strong>Mas é útil?</strong> No nosso caso, onde queríamos reutilizar a maior parte do código de nosso client no server foi uma vitória total, mas eu pensaria duas vezes antes de construir um servidor completo com Elm, já que ele não oferece as ferramentas necessárias pra permitir uma experiência de desenvolvimento satisfatória, embora seja possível.</p>
+<p>Talvez <a href="https://youtu.be/ZnYa99QoznE?t=4755">Roc</a> seja a linguagem apropriada para estes casos. Mal posso esperar!</p>
+<p>E então, o que achou desta abordagem? Você já teve que fazer algo similar ou totalmente diferente pra resolver o mesmo problema?</p>
+<p>Obrigado por ler!</p>
+
+
+</body>
+
+</html>

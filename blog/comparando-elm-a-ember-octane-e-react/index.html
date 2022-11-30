@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        
+        Comparando Elm a Ember Octane e React
+        
+    </title>
+    <link rel="alternate" href="/atom.xml" type="application/atom+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+    <!-- Panelbear Analytics - We respect your privacy -->
+    <script async src="https://cdn.panelbear.com/analytics.js?site=1fTA9gU3VFx"></script>
+    <script>
+        window.panelbear = window.panelbear || function () {(window.panelbear.q = window.panelbear.q || []).push(arguments);};
+        panelbear('config', {site: '1fTA9gU3VFx'});
+    </script>
+</head>
+
+<body>
+    
+    <p><a href="http://www.eberfdias.com/blog/">&larr; ver outras postagens</a></p>
+
+    <h1>Comparando Elm a Ember Octane e React</h1>
+
+    <p><small>12&#x2F;05&#x2F;2020</small></p>
+
+    <p>Hoje me deparei com o artigo &quot;<a href="https://www.pzuraq.com/comparing-ember-octane-and-react/">Comparing Ember Octane and React</a>&quot; no Hacker News.</p>
+<p>Ele tenta demonstrar como uma mesma aplicação pode ser construída tanto com React quanto Ember, detalhando suas implementações e chegando a algumas conclusões a partir disto. A aplicação é um simples sistema de busca do Hacker News que você pode testar aqui:</p>
+<ul>
+<li><a href="https://codesandbox.io/s/github/the-road-to-learn-react/hacker-stories/tree/hs/Async-Await-in-React">React</a></li>
+<li><a href="https://glitch.com/~comparing-ember-octane-and-react">Ember</a></li>
+</ul>
+<p>Ao final do artigo, o autor (<a href="https://www.pzuraq.com/author/pzuraq/">Chris Garrett</a>, que é um membro do core team do Ember) escreve:</p>
+<blockquote>
+<p>Escrevendo este post, eu sinto que pude experimentar React com hooks de forma muito mais profunda que nas minhas pesquisas anteriores, e eu gostei muito do que aprendi. É um modelo de programação interessante, e enquanto não esteja totalmente convencido ainda (pessoalmente eu acho que prefiro algo mais parecido com <strong>Elm</strong>), posso ver claramente porque as pessoas gostam dele e quais são suas vantagens.</p>
+</blockquote>
+<p>Isso me fez pensar: como seria a versão Elm da mesma aplicação? Então eu tentei contruí-la! Você pode ver o resultado final <a href="https://ellie-app.com/8Rn7dL9RKyWa1">aqui</a>.</p>
+<p>Como no post original, vamos dar uma olhada mais profunda no que está acontecendo.</p>
+<h1 id="getting-started">Getting started</h1>
+<pre data-lang="elm" style="background-color:#fdf6e3;color:#657b83;" class="language-elm "><code class="language-elm" data-lang="elm"><span style="color:#859900;">port module Main exposing </span><span>(</span><span style="color:#b58900;">main</span><span>)
+</span><span>
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Browser
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Browser.Dom </span><span style="color:#cb4b16;">as </span><span style="color:#859900;">Dom
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Html </span><span style="color:#cb4b16;">exposing </span><span>(</span><span style="color:#268bd2;">Html</span><span>, </span><span style="color:#b58900;">a</span><span>, </span><span style="color:#b58900;">button</span><span>, </span><span style="color:#b58900;">div</span><span>, </span><span style="color:#b58900;">h1</span><span>, </span><span style="color:#b58900;">hr</span><span>, </span><span style="color:#b58900;">input</span><span>, </span><span style="color:#b58900;">label</span><span>, </span><span style="color:#b58900;">p</span><span>, </span><span style="color:#b58900;">span</span><span>, </span><span style="color:#b58900;">strong</span><span>, </span><span style="color:#b58900;">text</span><span>)
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Html.Attributes </span><span style="color:#cb4b16;">exposing </span><span>(</span><span style="color:#b58900;">disabled</span><span>, </span><span style="color:#b58900;">for</span><span>, </span><span style="color:#b58900;">href</span><span>, </span><span style="color:#b58900;">id</span><span>, </span><span style="color:#b58900;">type_</span><span>, </span><span style="color:#b58900;">value</span><span>)
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Html.Events </span><span style="color:#cb4b16;">exposing </span><span>(</span><span style="color:#b58900;">onClick</span><span>, </span><span style="color:#b58900;">onInput</span><span>)
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Http
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Json.Decode </span><span style="color:#cb4b16;">as </span><span style="color:#859900;">Decode </span><span style="color:#cb4b16;">exposing </span><span>(</span><span style="color:#268bd2;">Decoder</span><span>)
+</span><span style="color:#cb4b16;">import </span><span style="color:#859900;">Task
+</span><span>
+</span><span>
+</span><span style="color:#859900;">port </span><span style="color:#b58900;">sendQuery </span><span style="color:#859900;">: </span><span style="color:#268bd2;">String </span><span style="color:#859900;">-&gt; </span><span style="color:#268bd2;">Cmd msg
+</span></code></pre>
+<p>É assim que a maioria das aplicações Elm (e arquivos) começam. Você define o nome do módulo do arquivo e explicitamente declara o que quer expor e importar de outros módulos. Elm tem seu próprio package manager e quando você cria um novo projeto, ele irá instalar alguns pacotes básicos. Nós tivemos que instalar alguns pacotes extras como <code>elm/json</code> e <code>elm/http</code>.</p>
+<p>Uma coisa importante do nosso módulo é que ele começa com o texto <code>port module</code>. Caso você nunca tenha ouvido falar de Elm, ela é uma linguagem funcional totalmente pura que não pode ter efeitos colaterais. Isso significa que não podemos, por exemplo, definir coisas no nosso <code>localStorage</code> a partir do código Elm. É aí que ports entram, mas vamos falar mais sobre isso depois. No final desta seção declaramos um port chamado <code>sendQuery</code> que usaremos mais à frente.</p>
+<pre data-lang="elm" style="background-color:#fdf6e3;color:#657b83;" class="language-elm "><code class="language-elm" data-lang="elm"><span style="color:#859900;">type alias </span><span style="color:#b58900;">Story </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#859900;">{</span><span> id </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">String
+</span><span>    </span><span style="color:#859900;">,</span><span> title </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">String
+</span><span>    </span><span style="color:#859900;">,</span><span> author </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">String
+</span><span>    </span><span style="color:#859900;">,</span><span> url </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">String
+</span><span>    </span><span style="color:#859900;">,</span><span> comments </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">Int
+</span><span>    </span><span style="color:#859900;">,</span><span> points </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">Int
+</span><span>    </span><span style="color:#859900;">}
+</span><span>
+</span><span>
+</span><span style="color:#859900;">type alias </span><span style="color:#b58900;">Model </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#859900;">{</span><span> input </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">String
+</span><span>    </span><span style="color:#859900;">,</span><span> lastSearch </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">String
+</span><span>    </span><span style="color:#859900;">,</span><span> stories </span><span style="color:#859900;">: </span><span style="color:#cb4b16;">Stories
+</span><span>    </span><span style="color:#859900;">}
+</span><span>
+</span><span>
+</span><span style="color:#859900;">type </span><span style="color:#b58900;">Stories
+</span><span>    </span><span style="color:#859900;">= </span><span style="color:#cb4b16;">Loading
+</span><span>    </span><span style="color:#859900;">| </span><span style="color:#cb4b16;">Error
+</span><span>    </span><span style="color:#859900;">| </span><span style="color:#cb4b16;">Stories </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">List Story</span><span style="color:#859900;">)
+</span><span>
+</span><span>
+</span><span style="color:#859900;">type </span><span style="color:#b58900;">Msg
+</span><span>    </span><span style="color:#859900;">= </span><span style="color:#cb4b16;">NoOp
+</span><span>    </span><span style="color:#859900;">| </span><span style="color:#cb4b16;">GotInput String
+</span><span>    </span><span style="color:#859900;">| </span><span style="color:#cb4b16;">Search
+</span><span>    </span><span style="color:#859900;">| </span><span style="color:#cb4b16;">Dismiss String
+</span><span>    </span><span style="color:#859900;">| </span><span style="color:#cb4b16;">GotResults </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Result Http</span><span style="color:#859900;">.</span><span style="color:#cb4b16;">Error Stories</span><span style="color:#859900;">)
+</span></code></pre>
+<p>Aqui temos as definições dos nossos tipos. Elm é uma linguagem forte e estaticamente tipada. Isso significa que podemos criar nossos próprios tipos para modelar nossa aplicação. Promeiro temos dois tipos alias: <code>Story</code> e <code>Model</code>. Um tipo alias é um tipo que dá um apelido a uma estrutura já conhecida. Desta forma podemos depender do compilador pra nos ajudar a escrever códigos corretos o tempo todo.</p>
+<p>Depois temos dois tipos customizados: <code>Stories</code> e <code>Msg</code>. Estes tipos irão nos ajudar entender melhor o estado da nossa aplicação e o que devemos fazer a seu respeito.</p>
+<h1 id="a-tea">A TEA</h1>
+<p>A TEA (ou The Elm Architecture) é uma forma de descrever como a maioria das aplicações Elm funcionam e como os dados fluem através de nosso código. Ela consiste em alguns conceitos básicos:</p>
+<ul>
+<li>Temos um estado global;</li>
+<li>Este estado é renderizado usando alguma função <code>view</code>;</li>
+<li>A <code>view</code> pode enviar mensagens de algum tipo para a função <code>update</code> (imagine um clique de botão ou o envio de um formulário);</li>
+<li>Por fim, o <code>update</code> muta o estado que então é renderizado novamente pela <code>view</code>.</li>
+</ul>
+<p>E é isso! Então vamos construir estas funções:</p>
+<pre data-lang="elm" style="background-color:#fdf6e3;color:#657b83;" class="language-elm "><code class="language-elm" data-lang="elm"><span style="color:#b58900;">update </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Msg </span><span style="color:#859900;">-&gt; </span><span style="color:#268bd2;">Model </span><span style="color:#859900;">-&gt;</span><span> ( </span><span style="color:#268bd2;">Model</span><span>, </span><span style="color:#268bd2;">Cmd Msg</span><span> )
+</span><span style="color:#b58900;">update </span><span>msg model </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#859900;">case </span><span>msg </span><span style="color:#859900;">of
+</span><span>        </span><span style="color:#cb4b16;">NoOp </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">(</span><span> model</span><span style="color:#859900;">, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>none </span><span style="color:#859900;">)
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">GotInput</span><span> i </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">( {</span><span> model </span><span style="color:#859900;">|</span><span> input </span><span style="color:#859900;">=</span><span> i </span><span style="color:#859900;">}, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>none </span><span style="color:#859900;">)
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">Search </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">if </span><span>model</span><span style="color:#859900;">.</span><span>input </span><span style="color:#859900;">/=</span><span> model</span><span style="color:#859900;">.</span><span>lastSearch </span><span style="color:#859900;">then
+</span><span>                </span><span style="color:#859900;">( {</span><span> model </span><span style="color:#859900;">|</span><span> lastSearch </span><span style="color:#859900;">=</span><span> model</span><span style="color:#859900;">.</span><span>input</span><span style="color:#859900;">,</span><span> stories </span><span style="color:#859900;">= </span><span style="color:#cb4b16;">Loading </span><span style="color:#859900;">}
+</span><span>                </span><span style="color:#859900;">, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>batch
+</span><span>                    </span><span style="color:#859900;">[</span><span> request model</span><span style="color:#859900;">.</span><span>input
+</span><span>                    </span><span style="color:#859900;">,</span><span> sendQuery model</span><span style="color:#859900;">.</span><span>input
+</span><span>                    </span><span style="color:#859900;">,</span><span> focusSearch
+</span><span>                    </span><span style="color:#859900;">]
+</span><span>                </span><span style="color:#859900;">)
+</span><span>
+</span><span>            </span><span style="color:#859900;">else
+</span><span>                </span><span style="color:#859900;">(</span><span> model</span><span style="color:#859900;">, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>none </span><span style="color:#859900;">)
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">Dismiss</span><span> id_ </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">let
+</span><span>                stories_ </span><span style="color:#859900;">=
+</span><span>                    </span><span style="color:#859900;">case </span><span>model</span><span style="color:#859900;">.</span><span>stories </span><span style="color:#859900;">of
+</span><span>                        </span><span style="color:#cb4b16;">Stories</span><span> s </span><span style="color:#859900;">-&gt;
+</span><span>                            </span><span style="color:#cb4b16;">Stories </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">List</span><span style="color:#859900;">.</span><span>filter </span><span style="color:#859900;">(.</span><span>id </span><span style="color:#859900;">&gt;&gt; </span><span style="color:#b58900;">(/=)</span><span> id_</span><span style="color:#859900;">)</span><span> s</span><span style="color:#859900;">)
+</span><span>
+</span><span>                        _ </span><span style="color:#859900;">-&gt;
+</span><span>                            model</span><span style="color:#859900;">.</span><span>stories
+</span><span>            </span><span style="color:#859900;">in
+</span><span>            </span><span style="color:#859900;">( {</span><span> model </span><span style="color:#859900;">|</span><span> stories </span><span style="color:#859900;">=</span><span> stories_ </span><span style="color:#859900;">}, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>none </span><span style="color:#859900;">)
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">GotResults</span><span> res </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">case </span><span>res </span><span style="color:#859900;">of
+</span><span>                </span><span style="color:#cb4b16;">Err</span><span> e </span><span style="color:#859900;">-&gt;
+</span><span>                    </span><span style="color:#859900;">let
+</span><span>                        _ </span><span style="color:#859900;">=
+</span><span>                            </span><span style="color:#cb4b16;">Debug</span><span style="color:#859900;">.</span><span>log </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">error</span><span style="color:#839496;">&quot;</span><span> e
+</span><span>                    </span><span style="color:#859900;">in
+</span><span>                    </span><span style="color:#859900;">( {</span><span> model </span><span style="color:#859900;">|</span><span> stories </span><span style="color:#859900;">= </span><span style="color:#cb4b16;">Error </span><span style="color:#859900;">}, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>none </span><span style="color:#859900;">)
+</span><span>
+</span><span>                </span><span style="color:#cb4b16;">Ok</span><span> s </span><span style="color:#859900;">-&gt;
+</span><span>                    </span><span style="color:#859900;">( {</span><span> model </span><span style="color:#859900;">|</span><span> stories </span><span style="color:#859900;">=</span><span> s </span><span style="color:#859900;">}, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>none </span><span style="color:#859900;">)
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">view </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Model </span><span style="color:#859900;">-&gt; </span><span style="color:#268bd2;">Html Msg
+</span><span style="color:#b58900;">view </span><span>model </span><span style="color:#859900;">=
+</span><span>    div </span><span style="color:#859900;">[] &lt;|
+</span><span>        h1 </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">My Hacker Stories</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">]
+</span><span>            </span><span style="color:#859900;">::</span><span> searchForm model</span><span style="color:#859900;">.</span><span>input
+</span><span>            </span><span style="color:#859900;">++</span><span> stories model</span><span style="color:#859900;">.</span><span>stories
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">searchForm </span><span style="color:#859900;">: </span><span style="color:#268bd2;">String </span><span style="color:#859900;">-&gt; </span><span style="color:#268bd2;">List</span><span> (</span><span style="color:#268bd2;">Html Msg</span><span>)
+</span><span style="color:#b58900;">searchForm </span><span>input_ </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#859900;">[</span><span> label </span><span style="color:#859900;">[</span><span> for </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">search</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] [</span><span> strong </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">Search:</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] ]
+</span><span>    </span><span style="color:#859900;">,</span><span> input </span><span style="color:#859900;">[</span><span> id </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">search</span><span style="color:#839496;">&quot;</span><span style="color:#859900;">,</span><span> value input_</span><span style="color:#859900;">,</span><span> onInput </span><span style="color:#cb4b16;">GotInput</span><span style="color:#859900;">,</span><span> type_ </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">text</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] []
+</span><span>    </span><span style="color:#859900;">,</span><span> button </span><span style="color:#859900;">[</span><span> disabled </span><span style="color:#859900;">(</span><span>input_ </span><span style="color:#859900;">== </span><span style="color:#839496;">&quot;&quot;</span><span style="color:#859900;">),</span><span> onClick </span><span style="color:#cb4b16;">Search </span><span style="color:#859900;">] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">Submit</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">]
+</span><span>    </span><span style="color:#859900;">,</span><span> hr </span><span style="color:#859900;">[] []
+</span><span>    </span><span style="color:#859900;">]
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">stories </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Stories </span><span style="color:#859900;">-&gt; </span><span style="color:#268bd2;">List</span><span> (</span><span style="color:#268bd2;">Html Msg</span><span>)
+</span><span style="color:#b58900;">stories </span><span>stories_ </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#859900;">case </span><span>stories_ </span><span style="color:#859900;">of
+</span><span>        </span><span style="color:#cb4b16;">Loading </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">[</span><span> p </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">Loading ...</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] ]
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">Error </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#859900;">[</span><span> p </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">Something went wrong ...</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] ]
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">Stories </span><span style="color:#859900;">[] -&gt;
+</span><span>            </span><span style="color:#859900;">[</span><span> p </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">No results.</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] ]
+</span><span>
+</span><span>        </span><span style="color:#cb4b16;">Stories</span><span> list </span><span style="color:#859900;">-&gt;
+</span><span>            </span><span style="color:#cb4b16;">List</span><span style="color:#859900;">.</span><span>map storyItem list
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">storyItem </span><span>i </span><span style="color:#859900;">=
+</span><span>    div </span><span style="color:#859900;">[]
+</span><span>        </span><span style="color:#859900;">[</span><span> span </span><span style="color:#859900;">[] [</span><span> a </span><span style="color:#859900;">[</span><span> href i</span><span style="color:#859900;">.</span><span>url </span><span style="color:#859900;">] [</span><span> text i</span><span style="color:#859900;">.</span><span>title </span><span style="color:#859900;">] ]
+</span><span>        </span><span style="color:#859900;">,</span><span> text </span><span style="color:#839496;">&quot; &quot;
+</span><span>        </span><span style="color:#859900;">,</span><span> span </span><span style="color:#859900;">[] [</span><span> text i</span><span style="color:#859900;">.</span><span>author </span><span style="color:#859900;">]
+</span><span>        </span><span style="color:#859900;">,</span><span> text </span><span style="color:#839496;">&quot; &quot;
+</span><span>        </span><span style="color:#859900;">,</span><span> span </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">String</span><span style="color:#859900;">.</span><span>fromInt i</span><span style="color:#859900;">.</span><span>comments</span><span style="color:#859900;">) ]
+</span><span>        </span><span style="color:#859900;">,</span><span> text </span><span style="color:#839496;">&quot; &quot;
+</span><span>        </span><span style="color:#859900;">,</span><span> span </span><span style="color:#859900;">[] [</span><span> text </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">String</span><span style="color:#859900;">.</span><span>fromInt i</span><span style="color:#859900;">.</span><span>points</span><span style="color:#859900;">) ]
+</span><span>        </span><span style="color:#859900;">,</span><span> text </span><span style="color:#839496;">&quot; &quot;
+</span><span>        </span><span style="color:#859900;">,</span><span> span </span><span style="color:#859900;">[] [</span><span> button </span><span style="color:#859900;">[</span><span> onClick </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Dismiss</span><span> i</span><span style="color:#859900;">.</span><span>id</span><span style="color:#859900;">) ] [</span><span> text </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">Dismiss</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">] ]
+</span><span>        </span><span style="color:#859900;">]
+</span></code></pre>
+<p>Aqui temos uma função <code>update</code> que irá receber nosso model (estado) e mensagem. Lembra dos nossos tipos <code>Model</code> e <code>Msg</code>? Vamos usá-los aqui. Precisamos checar qual <code>Msg</code> estamos recebendo para realizar as mudanças apropriadas ao <code>Model</code>. E se você estiver prestando atenção vai ver que nós não retornamos apenas o <code>Model</code>, mas também um <code>Cmd msg</code> (comando). Lembra quando eu disse que Elm não tem efeitos colaterais? Pra resolver este problema temos comandos, que são um tipo especial que entregamos pro runtime do Elm resolver pra gente. Pode ser, por exemplo, uma requisição HTTP como a que estamos fazendo quando <code>Msg</code> é <code>Seach</code>. Mais sobre isso depois...</p>
+<p>Depois disso, temos algumas funções especiais que irão retornar o tipo <code>Html</code>. Elas não retornam HTML em si, mas é assim que implementamos templates e componentes com Elm. Usando apenas funções! O runtime do Elm vai se encarregar de renderizar o HTML correto a partir delas.</p>
+<p>Agora vamos juntar tudo:</p>
+<pre data-lang="elm" style="background-color:#fdf6e3;color:#657b83;" class="language-elm "><code class="language-elm" data-lang="elm"><span style="color:#b58900;">main </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Program String Model Msg
+</span><span style="color:#b58900;">main </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#cb4b16;">Browser</span><span style="color:#859900;">.</span><span>element
+</span><span>        </span><span style="color:#859900;">{</span><span> init </span><span style="color:#859900;">=
+</span><span>            </span><span style="color:#859900;">\</span><span>query </span><span style="color:#859900;">-&gt;
+</span><span>                </span><span style="color:#859900;">( {</span><span> input </span><span style="color:#859900;">=</span><span> query</span><span style="color:#859900;">,</span><span> lastSearch </span><span style="color:#859900;">=</span><span> query</span><span style="color:#859900;">,</span><span> stories </span><span style="color:#859900;">= </span><span style="color:#cb4b16;">Loading </span><span style="color:#859900;">}
+</span><span>                </span><span style="color:#859900;">, </span><span style="color:#cb4b16;">Cmd</span><span style="color:#859900;">.</span><span>batch </span><span style="color:#859900;">[</span><span> request query</span><span style="color:#859900;">,</span><span> focusSearch </span><span style="color:#859900;">]
+</span><span>                </span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">,</span><span> view </span><span style="color:#859900;">=</span><span> view
+</span><span>        </span><span style="color:#859900;">,</span><span> update </span><span style="color:#859900;">=</span><span> update
+</span><span>        </span><span style="color:#859900;">,</span><span> subscriptions </span><span style="color:#859900;">=</span><span> always </span><span style="color:#cb4b16;">Sub</span><span style="color:#859900;">.</span><span>none
+</span><span>        </span><span style="color:#859900;">}
+</span></code></pre>
+<p>A função <code>main</code> é o ponto de entrada da nossa aplicação. É a função que o runtime do Elm vai olhar assim que tudo for inicializado. Aqui estamos dizendo explicitamente quais funções nossa aplicação deve usar pra cada passo da TEA. a chave <code>init</code> é uma função que deve retornar nosso model (estado) inicial. As chaves <code>view</code> e <code>update</code> não precisam de maiores explicações. Por fim, temos a <code>subscriptions</code> que não vamos usar mas que se você estiver curioso pode dar uma olhada no <a href="https://guide.elm-lang.org/">elm guide</a>.</p>
+<h1 id="o-que-ficou-faltando">O que ficou faltando</h1>
+<p>Por fim temos algumas funções extras que irão tornar a interação com nossa aplicação mais dinâmica:</p>
+<pre data-lang="elm" style="background-color:#fdf6e3;color:#657b83;" class="language-elm "><code class="language-elm" data-lang="elm"><span style="color:#b58900;">focusSearch </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Cmd Msg
+</span><span style="color:#b58900;">focusSearch </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#cb4b16;">Task</span><span style="color:#859900;">.</span><span>attempt </span><span style="color:#859900;">(\</span><span>_ </span><span style="color:#859900;">-&gt; </span><span style="color:#cb4b16;">NoOp</span><span style="color:#859900;">) (</span><span style="color:#cb4b16;">Dom</span><span style="color:#859900;">.</span><span>focus </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">search</span><span style="color:#839496;">&quot;</span><span style="color:#859900;">)
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">request </span><span style="color:#859900;">: </span><span style="color:#268bd2;">String </span><span style="color:#859900;">-&gt; </span><span style="color:#268bd2;">Cmd Msg
+</span><span style="color:#b58900;">request </span><span>query </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#cb4b16;">Http</span><span style="color:#859900;">.</span><span>get
+</span><span>        </span><span style="color:#859900;">{</span><span> url </span><span style="color:#859900;">= </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">https://hn.algolia.com/api/v1/search?query=</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">++</span><span> query
+</span><span>        </span><span style="color:#859900;">,</span><span> expect </span><span style="color:#859900;">= </span><span style="color:#cb4b16;">Http</span><span style="color:#859900;">.</span><span>expectJson </span><span style="color:#cb4b16;">GotResults</span><span> resultsDecoder
+</span><span>        </span><span style="color:#859900;">}
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">resultsDecoder </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Decoder Stories
+</span><span style="color:#b58900;">resultsDecoder </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">hits</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>list storyDecoder</span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">|&gt; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>andThen </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>succeed </span><span style="color:#859900;">&lt;&lt; </span><span style="color:#cb4b16;">Stories</span><span style="color:#859900;">)
+</span><span>
+</span><span>
+</span><span style="color:#b58900;">storyDecoder </span><span style="color:#859900;">: </span><span style="color:#268bd2;">Decoder Story
+</span><span style="color:#b58900;">storyDecoder </span><span style="color:#859900;">=
+</span><span>    </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>map6 </span><span style="color:#cb4b16;">Story
+</span><span>        </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">objectID</span><span style="color:#839496;">&quot; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>string</span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">title</span><span style="color:#839496;">&quot; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>string</span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">author</span><span style="color:#839496;">&quot; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>string</span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">url</span><span style="color:#839496;">&quot; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>string</span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">num_comments</span><span style="color:#839496;">&quot; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>int</span><span style="color:#859900;">)
+</span><span>        </span><span style="color:#859900;">(</span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>field </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">points</span><span style="color:#839496;">&quot; </span><span style="color:#cb4b16;">Decode</span><span style="color:#859900;">.</span><span>int</span><span style="color:#859900;">)
+</span></code></pre>
+<p>A função <code>focusSearch</code> é apenas um helper que retorna um comando para informar o runtime do Elm para focar em um elemento com uma <code>id</code> específica e é isso. Eu copiei esta função inteira do elm guide.</p>
+<p>A função realmente importante vem em seguida: <code>request</code>. Ela recebe uma query string e cria um comando que irá rodar uma requisição HTTP. É aqui que Elm brilha pra mim. Após fazer a requisição o runtime irá mandar uma nova mensagem pra nossa aplicação com os dados usando a mensagem <code>GotResults</code>, esperando um JSON que possa ser decodificado com sucesso pela função <code>resultsDecoder</code>. Veja, tudo em Elm é tipado então não podemos simplesmente receber qualquer tipo de dado do servidor. Como o compilador saberia com quais tipos estamos lidando? É por isso que temos que decodificar o JSON que recebemos, fazendo-o encaixar em algum tipo específico. No nosso caso, precisamos que o nosso JSON retorne um tipo <code>Stories</code> válido.</p>
+<p>Se você der uma olhada na forma como lidamos com a mensagem <code>GotResults</code> na nossa função <code>update</code>, vai ver que o dado que temos de volta pode ser <code>Ok ...</code> ou <code>Err ...</code>. Um <code>Err</code> pode ocorrer se a requisição HTTP falhar ou se a decodificação falhar.</p>
+<h1 id="ainda-precisamos-de-js">Ainda precisamos de JS...</h1>
+<pre data-lang="html" style="background-color:#fdf6e3;color:#657b83;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">html</span><span style="color:#93a1a1;">&gt;
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">head</span><span style="color:#93a1a1;">&gt;
+</span><span>  </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">style</span><span style="color:#93a1a1;">&gt;
+</span><span>    </span><span style="color:#93a1a1;">/* you can style your program here */
+</span><span>  </span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">style</span><span style="color:#93a1a1;">&gt;
+</span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">head</span><span style="color:#93a1a1;">&gt;
+</span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">body</span><span style="color:#93a1a1;">&gt;
+</span><span>  </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">main</span><span style="color:#93a1a1;">&gt;&lt;/</span><span style="color:#268bd2;">main</span><span style="color:#93a1a1;">&gt;
+</span><span>  </span><span style="color:#93a1a1;">&lt;</span><span style="color:#268bd2;">script</span><span style="color:#93a1a1;">&gt;
+</span><span>    </span><span style="color:#268bd2;">var </span><span>app = </span><span style="color:#859900;">Elm</span><span>.Main.</span><span style="color:#b58900;">init</span><span>({
+</span><span>      node: </span><span style="color:#859900;">document</span><span>.</span><span style="color:#b58900;">querySelector</span><span>(</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">main</span><span style="color:#839496;">&#39;</span><span>),
+</span><span>      flags: localStorage.</span><span style="color:#b58900;">getItem</span><span>(</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">searchTerm</span><span style="color:#839496;">&#39;</span><span>) </span><span style="color:#859900;">|| </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">Elm</span><span style="color:#839496;">&#39;
+</span><span>    });
+</span><span>
+</span><span>    app.ports.sendQuery.</span><span style="color:#b58900;">subscribe</span><span>(</span><span style="color:#268bd2;">query =&gt; </span><span>localStorage.</span><span style="color:#b58900;">setItem</span><span>(</span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">searchTerm</span><span style="color:#839496;">&#39;</span><span>, query));
+</span><span>  </span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">script</span><span style="color:#93a1a1;">&gt;
+</span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">body</span><span style="color:#93a1a1;">&gt;
+</span><span style="color:#93a1a1;">&lt;/</span><span style="color:#268bd2;">html</span><span style="color:#93a1a1;">&gt;
+</span></code></pre>
+<p>A parte importante do nosso HTML/JS é onde inicializamos a app. Na chamada à função <code>init</code> nós passamos o valor atualmente guardado no nosso <code>localStorage</code>. Dê uma olhada na função <code>init</code> do lado do Elm para ver como lidamos com isto.</p>
+<p>Depois, usamos o port <code>sendQuery</code> para salvar o termo de busca toda vez que uma nova busca ocorrer. Olhe em como lidamos com a mensagem <code>Search</code> na função <code>update</code> para ver o uso do port <code>sendQuery</code> que definimos no início de nosso módulo.</p>
+<h1 id="aprendizados">Aprendizados</h1>
+<p>Eu não tenho nenhuma experiência real com React ou Ember então esta seção não será tão bem elaborada ou profunda quanto no artigo original. Mas vamos dar uma olhada em como Elm resolve alguns dos nosso problemas de maneira simples e eficientes.</p>
+<h2 id="custom-types-sao-incriveis">Custom types são incríveis</h2>
+<p>Na função <code>storiesReducer</code> da implementação em React temos algo parecido com o que a nossa função <code>update</code> faz. O problema é que ele usa strings puras como chaves para as possíveis ações a serem executadas. Isso é ok até você precisar de mais mensagens/ações.</p>
+<p>Pelo fato de estarmos usando um custom type como nossas mensagens (a gente poderia usar strings mas elas não seriam muito úteis), precisamos lidar com todas as possibilidades de mensagens que existem dentro deste tipo. Se precisarmos de mais mensagens, basta adicioná-las ao tipo <code>Msg</code> e o compilador vai educadamente nos avisar de todos os lugares onde precisamos lidar com esta nova mensagem se esquecermos de algo.</p>
+<h2 id="custom-types-sao-incriveis2">Custom types são incríveis²</h2>
+<p>Tanto na implementação React quanto Ember você vê que o &quot;model&quot; tem algumas flags como <code>isLoading</code> ou <code>isError</code>. Tudo o que essas flags fazem é informar o estado dos resultados que estamos tentando carregar. Veja como sempre é necessário resetar estes valores pra não acontecer de termos a informação de erro enquanto carregamos algo ao mesmo tempo. Nada impede isso de realmente acontecer...</p>
+<p>Podemos resolver isto com custom types que representam um estado dos resultados por vez. Não é possível termos a situação <code>Loading</code> e <code>Error</code> ao mesmo tempo, assim temos certeza que nossa view sempre irá renderizar a coisa certa.</p>
+<h2 id="decodificacao-de-json">Decodificação de JSON</h2>
+<p>A gente tem um bug nessa app. O título ou autor de uma história podem ter um valor <code>null</code> vindo da chamada da API. Se eu abrir as apps React ou Ember e procurar por algo como &quot;elmish&quot; por exemplo, você vai ver algumas linhas esquisitas. Isso acontece porque JavaScript não vai te impedir de acessar dados que não existem em um objeto, renderizando uma lista confusa e pouco informativa de... coisas.</p>
+<p>Isso não pode acontecer com Elm. Além do fato de termos usados tipos alias para informar o compilador sobre a forma das nossas estruturas, quando recebemos dados do mundo exterior ele precisa passar por um processo de decodificação e este processo pode ser bem sucedido ou não: Elm nos força a lidar com ambas as situações ou nosso programa não compila. Procure por &quot;elmish&quot; na versão Elm e você verá a mensagem &quot;Something went wrong...&quot; (Algo de errado aconteceu...). Isto acontece porque nosso decoder só decodifica strings para a chave <code>title</code> e se temos um <code>null</code> do lado do JSON, ele não consegue decodificar.</p>
+<p>Nós poderíamos então atualizar nosso decodificador para lidar com estas situações, talvez fazendo o <code>title</code> ser um <code>Maybe String</code>, e isto nos forçaria a lidar com o fato de que <code>title</code> pode ser tanto <code>Just ...</code> quando <code>Nothing</code> em nossa função de <code>view</code>. Nunca seríamos capazes de reproduzir as linhas confusas e bobas que temos quando usamos &quot;apenas&quot; Javascript.</p>
+<h2 id="uma-abordagem-simples">Uma abordagem simples</h2>
+<p>Hooks, components, tracked properties, actions, etc... Aplicações do mundo JS podem ter muitos conceitos que requerem tempo para aprender e dominar. Por outro lado, Elm é super simples. Apesar da sua sintaxe esquisita, se você nunca lidou com algo parecidoa antes, Elm introduz pouquíssimos conceitos: tudo é função, e a forma como a sua aplicação funciona é através de iterações da TEA, só isso.</p>
+<hr />
+<p>Eu sinto que estou sendo superficial em comparação ao artigo tão bem informado e bem escrito no qual este foi baseado, mas eu espero ter tido algum sucesso em mostrar como Elm solucionaria problemas similares apontando para as coisas animadoras que a linguagem traz à mesa.</p>
+<p>O que eu estou esquecendo da minha lista de aprendizados? Existe algum lugar onde as soluções React/Ember sejam melhores? Por favor, mande seus comentários. Até breve!</p>
+
+
+</body>
+
+</html>

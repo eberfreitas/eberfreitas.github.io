@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        
+        Meu ambiente de trabalho
+        
+    </title>
+    <link rel="alternate" href="/atom.xml" type="application/atom+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+
+    <!-- Panelbear Analytics - We respect your privacy -->
+    <script async src="https://cdn.panelbear.com/analytics.js?site=1fTA9gU3VFx"></script>
+    <script>
+        window.panelbear = window.panelbear || function () {(window.panelbear.q = window.panelbear.q || []).push(arguments);};
+        panelbear('config', {site: '1fTA9gU3VFx'});
+    </script>
+</head>
+
+<body>
+    
+    <p><a href="http://www.eberfdias.com/blog/">&larr; ver outras postagens</a></p>
+
+    <h1>Meu ambiente de trabalho</h1>
+
+    <p><small>01&#x2F;07&#x2F;2011</small></p>
+
+    <p>Por um tempo eu fiquei usando Linux como meu sistema operacional. Sem dual boot nem nada, só Linux (Ubuntu). Depois de passar um bom tempo usando descobri que, por mais que eu adore o Linux e suas ferramentas, ele só brilha mesmo na linha de comando. Linux para desktop ainda está longe de ser ideal e eu me vi sentindo saudades do Windows, principalmente depois de ter experimentado o Win7, que está excelente.</p>
+<p>Tomei a dura decisão de que eu devia voltar para o Windows, mas agora existia um problema. Todo o meu ambiente de trabalho estava focado no Linux e eu precisava arranjar um jeito de conseguir trabalhar com as duas plataformas em conjunto.  Entrei no Forrst e perguntei se era possível criar uma VM e trabalhar nela com as aplicações que eu precisava mas realizar toda a interface através do Windows.  Foi aí que alguém me sugeriu o <a href="http://vagrantup.com/">Vagrant</a>!</p>
+<p>De cara eu me apaixonei pelo Vagrant. Achei a idéia sensacional. Basicamente ela é uma ferramenta de linha de comando que te permite configurar maquinas virtuais com extrema facilidade e usá-las para desenvolver dentro do seu sistema operacional de escolha. Pode ser Windows, OS X, o próprio linux, o que for, bastando ser possivel instalar Ruby e VirtualBox. O legal é que eu poderia reproduzir o servidor virtual que eu realmente vou usar em produção no meu ambiente de desenvolvimento e trabalhar sem me preocupar em adequar os ambientes. O Vagrant me permitia configurar uma pasta local a ser compartilhada na VM e eu poderia fazer todo o desenvolvimento a partir do próprio Windows.</p>
+<p>O Vagrant é ótimo! Ainda mais se você aprender a usar <a href="http://www.puppetlabs.com/puppet/introduction/">Puppet</a> ou <a href="http://www.opscode.com/chef/">Chef</a> para gerenciar as dependências dos pacotes utilizados na máquina, mas existiam alguns problemas que eu não conseguia resolver. O principal &quot;problema&quot; é que o servidor tinha que usar a porta 8080, ou qualquer outra porta acima de 1024 (acho que é isso), por alguma limitação de não sei o que. Isso acabava me atrapalhando um bocado na hora de trabalhar com URLs a partir do meu próprio sistema operacional uma vez que o meu framework às vezes não levava isso em consideração.</p>
+<p>Eu tentei então montar meu próprio Vagrant. Criei uma nova VM no VirtualBox com uma imagem do Ubuntu Server Edition configurando a rede para funcionar em modo bridge. Depois disso editei o arquivo <strong>/etc/network/interfaces</strong> de forma que ele ficasse com o seguinte conteúdo:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span># This file describes the network interfaces available on your system
+</span><span># and how to activate them. For more information, see interfaces(5).
+</span><span>
+</span><span># The loopback network interface
+</span><span>auto lo
+</span><span>iface lo inet loopback
+</span><span>
+</span><span># The primary network interface
+</span><span>auto eth0
+</span><span># iface eth0 inet dhcp
+</span><span>iface eth0 inet static
+</span><span>    address 192.168.1.200
+</span><span>    netmask 255.255.255.0
+</span><span>    network 192.168.1.1
+</span><span>    broadcast 192.168.1.255
+</span><span>    gateway 192.168.1.1
+</span></code></pre>
+<p>Ao reiniciar a VM agora ela tinha um IP local fixo na minha rede: 192.168.1.200.</p>
+<p>Depois eu criei uma pasta compartilhada no VirtualBox e instalei os Add-ons do VirtualBox na VM para poder usar a nova pasta. Criei um arquivo chamado <strong>./mount</strong> com alguns comandos que me ajudavam a montar e remontar a pasta quando precisasse. O conteúdo do arquivo é o seguinte:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>#!/bin/bash
+</span><span>sudo umount /home/eber/mnt
+</span><span>sudo mount -t vboxsf folder /home/eber/mnt
+</span></code></pre>
+<p>Eu desmonto a pasta antes de montar porque por algum motivo bizarro, os arquivos estáticos (js, css e etc) quebram quando eu atualizo seus conteúdos mas não dou um refresh na pasta montada. Assim fica fácil fazer o refresh sempre que for preciso.</p>
+<p>Em seguida eu precisava tornar simples iniciar e finalizar a máquina virtual no Windows. Eu dei uma olhada no codigo do Vagrant e perguntei por aí e consegui fazer dois arquivinhos que me ajudam nisso. Um deles é o <strong>start.bat</strong>:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>&quot;c:\Program Files\Oracle\VirtualBox\VBoxManage.exe&quot; startvm Ubuntu --type headless
+</span></code></pre>
+<p>E o outro é o <strong>stop.bat</strong>:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>&quot;c:\Program Files\Oracle\VirtualBox\VBoxManage.exe&quot; controlvm Ubuntu poweroff
+</span></code></pre>
+<p>A máquina é iniciada com o tipo headless, ou seja, roda &quot;em background&quot; (embora uma janela do CMD do Windows fique aberta, o que não é tão background assim).</p>
+<p><strong>[EDIT 08/08/2011]</strong></p>
+<p>O único problema de usar o método acima é que, na verdade, o processo da VM não é realmente <em>headless</em> no Windows, já uma janela da linha de comando fica aberta. Eu procurei por alternativas e achei um <a href="http://vbox.innotek.de/ticket/3549">ticket</a> no tracker do VBox falando exatamente sobre isso. Depois de ler tudo, existia a sugestão de usar um VBS (Visual Basic Script) pra abrir a VM. Aí vai:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>Set objShell = WScript.CreateObject(&quot;WScript.Shell&quot;)
+</span><span>objShell.Run &quot;&quot;&quot;C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe&quot;&quot; --startvm Ubuntu --vrdp=off&quot;, 0
+</span></code></pre>
+<p>Se o nome de sua VM for composto, tipo &quot;Ubuntu Server&quot; você só precisa colocar o nome entre duas aspas:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>Set objShell = WScript.CreateObject(&quot;WScript.Shell&quot;)
+</span><span>objShell.Run &quot;&quot;&quot;C:\Program Files\Oracle\VirtualBox\VBoxHeadless.exe&quot;&quot; --startvm &quot;&quot;Ubuntu Server&quot;&quot; --vrdp=off&quot;, 0
+</span></code></pre>
+<p>O que o script faz realmente eu não sei, porque não entendo nada de VBS, mas funciona :)</p>
+<p><strong>[/EDIT]</strong></p>
+<p>Pronto! Agora eu consegui ter um ambiente de trabalho muito similar ao que eu tenho em produção e poderia usar o servidor web na porta 80 sem problemas. Tudo o que eu fiz depois disso foi configurar um acesso via SSH usando o Putty e adicionar entradas no arquivo <strong>c:\Windows\System32\Drivers\etc\hosts</strong> apontando para o IP da máquina virtual. Como o IP é fixo, fica fácil manter a relação.</p>
+<p>Parece que é muito mais trabalho que usar Vagrant e não têm os benefícios de redistribuição que o Vagrant tem, por isso dependendo da forma como você trabalha, usar Vagrant é muito melhor e mais prático. Mas foi divertido configurar este ambiente e tem funcionado perfeitamente pra mim desde então.</p>
+
+
+</body>
+
+</html>
